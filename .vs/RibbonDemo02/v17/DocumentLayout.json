@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|c:\\users\\weiss\\source\\repos\\ribbondemo02\\ribbondemo02\\viewmodel\\filesribbongroupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|solutionrelative:ribbondemo02\\viewmodel\\filesribbongroupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|c:\\users\\weiss\\source\\repos\\ribbondemo02\\ribbondemo02\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|solutionrelative:ribbondemo02\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|c:\\users\\weiss\\source\\repos\\ribbondemo02\\ribbondemo02\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|solutionrelative:ribbondemo02\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|c:\\users\\weiss\\source\\repos\\ribbondemo02\\ribbondemo02\\views\\usercontrols\\filesribbongroup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|solutionrelative:ribbondemo02\\views\\usercontrols\\filesribbongroup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|c:\\users\\weiss\\source\\repos\\ribbondemo02\\ribbondemo02\\views\\usercontrols\\filesribbongroup.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|solutionrelative:ribbondemo02\\views\\usercontrols\\filesribbongroup.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|c:\\users\\weiss\\source\\repos\\ribbondemo02\\ribbondemo02\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E413BC-725E-4935-AA82-7B95583A1560}|RibbonDemo02\\RibbonDemo02.csproj|solutionrelative:ribbondemo02\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\Commands\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "RibbonDemo02\\Commands\\RelayCommand.cs",
+              "ToolTip": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\Commands\\RelayCommand.cs",
+              "RelativeToolTip": "RibbonDemo02\\Commands\\RelayCommand.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T18:44:45.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FilesRibbonGroupViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\ViewModel\\FilesRibbonGroupViewModel.cs",
+              "RelativeDocumentMoniker": "RibbonDemo02\\ViewModel\\FilesRibbonGroupViewModel.cs",
+              "ToolTip": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\ViewModel\\FilesRibbonGroupViewModel.cs",
+              "RelativeToolTip": "RibbonDemo02\\ViewModel\\FilesRibbonGroupViewModel.cs",
+              "ViewState": "AQIAAKAAAAAAAAAAAAAYwK8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T18:29:18.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "RibbonDemo02\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\MainWindow.xaml",
+              "RelativeToolTip": "RibbonDemo02\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-26T18:28:00.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FilesRibbonGroup.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml.cs",
+              "RelativeDocumentMoniker": "RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml.cs",
+              "ToolTip": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml.cs",
+              "RelativeToolTip": "RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T18:26:39.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FilesRibbonGroup.xaml",
+              "DocumentMoniker": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml",
+              "RelativeDocumentMoniker": "RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml",
+              "ToolTip": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml",
+              "RelativeToolTip": "RibbonDemo02\\Views\\UserControls\\FilesRibbonGroup.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-26T18:26:40.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RibbonDemo02\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\weiss\\source\\repos\\RibbonDemo02\\RibbonDemo02\\MainWindow.xaml.cs",
+              "RelativeToolTip": "RibbonDemo02\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T18:26:36.608Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

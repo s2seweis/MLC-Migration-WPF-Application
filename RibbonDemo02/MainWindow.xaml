@@ -1,0 +1,192 @@
+﻿<Window x:Class="RibbonDemo02.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RibbonDemo02.Views.UserControls"
+        xmlns:ribbon="clr-namespace:System.Windows.Controls.Ribbon;assembly=System.Windows.Controls.Ribbon" xmlns:viewmodels="clr-namespace:RibbonDemo02.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:FilesRibbonGroupViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800"
+        ResizeMode="NoResize" MinWidth="800" MinHeight="500"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Grid>
+        <ribbon:Ribbon Margin="0 -22" SelectionChanged="TabControl_SelectionChanged" Background="LightGray">
+            <!-- Help Pane Content -->
+            <ribbon:Ribbon.HelpPaneContent>
+
+                <ribbon:RibbonMenuButton HorizontalAlignment="Left" Margin="-780,4,0,0" Label="Menu">
+                    <!-- First Menu Item -->
+                    <ribbon:RibbonMenuItem Click="RibbonMenuItem_Click">
+                        <ribbon:RibbonMenuItem.Header>
+                            <Grid Margin="-22 0 0 0">
+                                <!-- Define Columns -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!-- Icon -->
+                                    <ColumnDefinition Width="10"/>
+                                    <!-- Spacing -->
+                                    <ColumnDefinition Width="*"/>
+                                    <!-- Text -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Image Icon -->
+                                <Image Source="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\32x32\key3.png"
+                                       Width="16" Height="16" HorizontalAlignment="Center"/>
+
+                                <!-- Menu Item Text -->
+                                <TextBlock Text="Einstellungen" Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ribbon:RibbonMenuItem.Header>
+                    </ribbon:RibbonMenuItem>
+
+                    <!-- Second Menu Item -->
+                    <ribbon:RibbonMenuItem Click="RibbonMenuItem_Click_1">
+                        <ribbon:RibbonMenuItem.Header>
+                            <Grid Margin="-22 0 0 0">
+                                <!-- Define Columns -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!-- Icon -->
+                                    <ColumnDefinition Width="10"/>
+                                    <!-- Spacing -->
+                                    <ColumnDefinition Width="*"/>
+                                    <!-- Text -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Image Icon -->
+                                <Image Source="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\door_exit.png"
+                                       Width="16" Height="16" HorizontalAlignment="Center"/>
+
+                                <!-- Menu Item Text -->
+                                <TextBlock Text="Beenden" Grid.Column="2" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ribbon:RibbonMenuItem.Header>
+                    </ribbon:RibbonMenuItem>
+                </ribbon:RibbonMenuButton>
+
+            </ribbon:Ribbon.HelpPaneContent>
+
+            <!-- Application Menu -->
+            <ribbon:Ribbon.ApplicationMenu >
+                <ribbon:RibbonApplicationMenu Visibility="Hidden" Background="green" BorderThickness="0"  
+                       KeyTip="F">
+
+
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
+
+            <!-- Ribbon Tabs -->
+            <ribbon:RibbonTab  Header="Migration" Name="TabMigration">
+                <ribbon:RibbonGroup Header="Migration" Margin="0 0 0 0">
+                    <ribbon:RibbonButton Margin="0 10 0 0" Label="Start"
+                        Command="{Binding StartCommand}"
+                        IsEnabled="{Binding IsChecked}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" 
+                        SmallImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\selection_recycle.png" 
+                        LargeImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\selection_recycle.png"
+                        KeyTip="V"
+                        ToolTip="Paste (Ctrl+V)"
+                        ToolTipDescription="Paste the contents of the Clipboard into the document."/>
+
+                    <ribbon:RibbonButton Margin="0 10 0 0" Label="Abbruch"
+                        SmallImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\sign_stop.png" 
+                        LargeImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\sign_stop.png"
+                        KeyTip="V"
+                        ToolTip="Paste (Ctrl+V)"
+                        ToolTipDescription="Paste the contents of the Clipboard into the document." />
+                    
+                </ribbon:RibbonGroup>
+
+                <!-- Ribbon Tab moved to UserControls -->
+                <local:FilesRibbonGroup/>
+
+                <local:LanguageRibbonGroup/>
+
+                <ribbon:RibbonGroup Header="Restore (Admin)" 
+                                    IsEnabled="False" 
+                                    Margin="0 10 0 0">
+                    
+                    <ribbon:RibbonButton Label="Wiederherstellen"
+                    SmallImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\replace.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\replace.png"
+                    KeyTip="V"
+                    ToolTip="Paste (Ctrl+V)"
+                    ToolTipDescription="Paste the contents of the Clipboard into the document." />
+
+                </ribbon:RibbonGroup>
+
+            </ribbon:RibbonTab>
+
+            <ribbon:RibbonTab Header="XML Files" Name="Edit">
+                <ribbon:RibbonGroup Header="Format" Margin="0,10,0,0">
+                    <!-- Radio Buttons Group -->
+                    <StackPanel Orientation="Vertical">
+                        <!-- Radio Button 1 -->
+                        <RadioButton Name="RadioButtonOption1" Content="Activated" Margin="5" 
+                     GroupName="EditOptions" IsChecked="True"/>
+
+                        <!-- Radio Button 2 -->
+                        <RadioButton Name="RadioButtonOption2" Content="Deactivated" Margin="5" 
+                     GroupName="EditOptions"/>
+                    </StackPanel>
+                </ribbon:RibbonGroup>
+
+                <ribbon:RibbonGroup Header="Edit" Margin="0,10,0,0">
+                    <!-- Radio Buttons Group -->
+
+                    <ribbon:RibbonButton Label="Speichern"
+                    SmallImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\save_as.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\save_as.png"
+                    KeyTip="V"
+                    ToolTip="Paste (Ctrl+V)"
+                    ToolTipDescription="Paste the contents of the Clipboard into the document." />
+
+
+                </ribbon:RibbonGroup>
+
+
+
+            </ribbon:RibbonTab>
+
+            <ribbon:RibbonTab Header="Logs" Name="TabLogs">
+                <ribbon:RibbonGroup Header="Clear" Margin="0,10,0,0">
+                    <!-- Radio Buttons Group -->
+                    <ribbon:RibbonButton Label="Leeren"
+                    SmallImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\garbage_overflow.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\garbage_overflow.png"
+                    KeyTip="V"
+                    ToolTip="Paste (Ctrl+V)"
+                    ToolTipDescription="Paste the contents of the Clipboard into the document." />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+
+            <ribbon:RibbonTab Header="Database" Name="Database">
+                <ribbon:RibbonGroup Header="Tables" Margin="0,10,0,0">
+                    <!-- Radio Buttons Group -->
+                    <ribbon:RibbonButton Label="Show"
+                    SmallImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\data.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\wpf-mvvm-demos\RibbonDemo02\RibbonDemo02\Assets\Icons\64x64\data.png"
+                    KeyTip="V"
+                    ToolTip="Paste (Ctrl+V)"
+                    ToolTipDescription="Paste the contents of the Clipboard into the document." />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+
+        </ribbon:Ribbon>
+
+        <!-- Content Control to hold selected views -->
+        <ContentControl x:Name="ContentControlArea" Margin="0,120,0,0"/>
+
+        <ProgressBar Name="ProgressBarFileReading" 
+                     Margin="0,0,0,0" 
+                     Height="25" 
+                     Minimum="0" 
+                     Maximum="100" 
+                     Value="0" 
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Bottom" />
+    </Grid>
+
+</Window>

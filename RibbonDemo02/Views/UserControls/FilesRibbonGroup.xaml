@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="RibbonDemo02.Views.UserControls.FilesRibbonGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ribbon="clr-namespace:System.Windows.Controls.Ribbon;assembly=System.Windows.Controls.Ribbon"
+             xmlns:viewModels="clr-namespace:RibbonDemo02.ViewModels">
+
+    <UserControl.DataContext>
+        <viewModels:FilesRibbonGroupViewModel />
+    </UserControl.DataContext>
+    
+    <Grid Margin="0 -70 0 0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Checkbox for Alle -->
+                <ribbon:RibbonCheckBox Margin="15 0 0 0" Grid.Row="0" Grid.Column="0" 
+                                       Label="Alle" KeyTip="R" 
+                                       HorizontalAlignment="Left"
+                                       IsChecked="{Binding AlleSelected}" />
+
+                <!-- Checkbox for Nachrichten -->
+                <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="1" 
+                                       Label="Nachrichten" KeyTip="R" 
+                                       IsChecked="{Binding NachrichtenSelected}" />
+
+                <!-- Checkbox for Hilfe -->
+                <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="0" 
+                                       Label="Hilfe" KeyTip="R" 
+                                       HorizontalAlignment="Left"
+                                       IsChecked="{Binding HilfeSelected}" />
+
+                <!-- Checkbox for Various -->
+                <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="0" 
+                                       Label="Various" KeyTip="R" 
+                                       HorizontalAlignment="Left"
+                                       IsChecked="{Binding VariousSelected}" />
+
+                <!-- Checkbox for Sonstiges -->
+                <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="1" 
+                                       Label="Sonstiges" KeyTip="R" 
+                                       HorizontalAlignment="Left"
+                                       IsChecked="{Binding SonstigesSelected}" />
+            </Grid>
+        <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Files</Label>
+    </Grid>
+
+</UserControl>

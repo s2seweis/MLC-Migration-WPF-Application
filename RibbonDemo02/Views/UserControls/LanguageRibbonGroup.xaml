@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="RibbonDemo02.Views.UserControls.LanguageRibbonGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ribbon="clr-namespace:System.Windows.Controls.Ribbon;assembly=System.Windows.Controls.Ribbon"
+             xmlns:viewModels="clr-namespace:RibbonDemo02.ViewModels">
+
+    <UserControl.DataContext>
+        <viewModels:FilesRibbonGroupViewModel />
+    </UserControl.DataContext>
+
+    <Grid Margin="0 -70 0 0" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- Checkbox for all languages -->
+            <ribbon:RibbonCheckBox Grid.Row="0" Grid.Column="0" Margin="15 0 0 0"
+                                   HorizontalAlignment="Left"
+                                   Label="Alle" KeyTip="R" 
+                                   IsChecked="{Binding AllLanguagesSelected}" />
+
+            <!-- Checkbox for German -->
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="0" 
+                                   HorizontalAlignment="Left"
+                                   Label="Deutsch" KeyTip="R" 
+                                   IsChecked="{Binding GermanSelected}" />
+
+            <!-- Checkbox for English -->
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="1" 
+                                   Label="Englisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding EnglishSelected}" />
+
+            <!-- Hidden Checkbox for French -->
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="2" 
+                                   Label="Französisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding FrenchSelected}" />
+
+            <!-- Checkbox for Spanish -->
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="3" 
+                                   Label="Spanisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding SpanishSelected}" />
+
+            <!-- Checkbox for Italian -->
+            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="0" 
+                                   Label="Italienisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding ItalianSelected}" />
+            
+            <!-- Checkbox for Dutch -->
+            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="1" 
+                                   Label="Niederländisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding DutchSelected}" />
+            
+            <!-- Checkbox for Japanese -->
+            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="2" 
+                                   Label="Japanisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding JapaneseSelected}" />
+            
+            <!-- Checkbox for Korean -->
+            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="3" 
+                                   Label="Koreanisch" KeyTip="R" 
+                                   HorizontalAlignment="Left"
+                                   IsChecked="{Binding KoreanSelected}" />
+        </Grid>
+        <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Languages</Label>
+    </Grid>
+</UserControl>

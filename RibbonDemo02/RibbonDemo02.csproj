@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78E413BC-725E-4935-AA82-7B95583A1560}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RibbonDemo02</RootNamespace>
+    <AssemblyName>RibbonDemo02</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.3.0.90, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.3.0.90\lib\net462\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon, Version=2.0.0.0, Culture=neutral, PublicKeyToken=928736e248aa81f9, processorArchitecture=MSIL">
+      <HintPath>..\packages\RibbonWinForms.5.0.1.1\lib\net472\System.Windows.Forms.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Helpers\DirectoryHelper.cs" />
+    <Compile Include="Models\AppState.cs" />
+    <Compile Include="Models\FileSelectionModel.cs" />
+    <Compile Include="Models\LanguageSelectionModel.cs" />
+    <Compile Include="ViewModel\FilesRibbonGroupViewModel.cs" />
+    <Compile Include="ViewModel\FilesRibbonGroupViewModelShort.cs" />
+    <Compile Include="Views\Database.cs" />
+    <Compile Include="Views\Pages\DatabaseView.xaml.cs">
+      <DependentUpon>DatabaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Logs.xaml.cs">
+      <DependentUpon>Logs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Migration.xaml.cs">
+      <DependentUpon>Migration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\XmlFiles.xaml.cs">
+      <DependentUpon>XmlFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\FilesRibbonGroup.xaml.cs">
+      <DependentUpon>FilesRibbonGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\LanguageRibbonGroup.xaml.cs">
+      <DependentUpon>LanguageRibbonGroup.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\Pages\DatabaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Logs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Migration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\XmlFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\FilesRibbonGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\LanguageRibbonGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="_mlc\dynamic\1\1\_forms\1001.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\1004.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\1031.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\1046.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\107.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\114.xml.___" />
+    <None Include="_mlc\dynamic\1\1\_forms\118.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\122.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\122.xml.org" />
+    <None Include="_mlc\dynamic\1\1\_forms\131.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\136.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\152.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\175.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\186.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\208.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\23.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\24.xml.alt" />
+    <None Include="_mlc\dynamic\1\1\_forms\29.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\29.xml.____" />
+    <None Include="_mlc\dynamic\1\1\_forms\3.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\34.xml.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\43.xml.old" />
+    <None Include="_mlc\dynamic\1\1\_forms\67.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\74.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\9001.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\9011.bak" />
+    <None Include="_mlc\dynamic\1\1\_forms\91.bak" />
+    <None Include="_mlc\dynamic\1\1\_messages\2.alt" />
+    <None Include="_mlc\dynamic\1\1\_messages\67.XML.bak" />
+    <None Include="_mlc\dynamic\1\1\_various\15.xml-xxx" />
+    <None Include="_mlc\dynamic\1\1\_various\24.xml.bak" />
+    <None Include="_mlc\dynamic\1\1\_various\91.XML.Transa#518511#Test" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_mlc\dynamic\1\12\" />
+    <Folder Include="_mlc\dynamic\1\1\_forms\_formsBackup\" />
+    <Folder Include="_mlc\dynamic\1\1\_help\_helpBackup\" />
+    <Folder Include="_mlc\dynamic\1\1\_messages\_messagesBackup\" />
+    <Folder Include="_mlc\dynamic\1\1\_various\_variousBackup\" />
+    <Folder Include="_mlc\dynamic\1\2\" />
+    <Folder Include="_mlc\dynamic\1\3\" />
+    <Folder Include="_mlc\dynamic\1\8\" />
+    <Folder Include="_mlc\dynamic\1\9\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_mlc\dynamic\1\1\_forms\0.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\10.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\100.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1001.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1003.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1004.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1005.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1006.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1007.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1008.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1009.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\101.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1011.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1012.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1013.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1014.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1015.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1016.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1018.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1019.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\102.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1020.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1022.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1025.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\103.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1031.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1035.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1036.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1038.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1039.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\104.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1041.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1045.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1046.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\1049.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\106.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\107.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\108.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\11.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\110.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\111.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\112.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\113.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\114.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\115.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\116.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\118.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\12.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\120.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\121.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\123.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\125.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\126.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\127.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\129.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\13.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\130.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\131.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\132.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\133.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\134.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\135.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\136.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\137.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\138.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\139.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\140.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\141.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\142.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\143.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\144.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\145.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\146.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\148.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\150.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\153.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\155.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\156.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\158.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\159.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\16.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\162.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\163.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\164.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\165.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\166.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\167.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\17.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\171.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\172.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\174.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\175.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\176.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\177.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\18.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\180.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\181.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\182.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\183.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\184.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\186.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\187.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\188.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\189.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\19.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\191.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\192.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\194.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\196.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\198.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\2.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\20.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\200.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\201.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\202.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\203.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\207.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\208.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\209.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\21.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\23.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\25.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\26.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\27.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\28.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\29.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\31.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\36.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\38.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\39.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\40.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\43.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\44.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\45.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\47.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\51.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\52.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\53.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\54.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\56.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\57.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\59.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\6.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\60.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\61.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\62.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\64.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\65.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\66.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\67.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\68.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\69.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\7.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\71.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\73.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\74.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\75.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\76.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\77.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\78.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\79.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\80.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\81.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\83.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\84.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\85.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\88.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\89.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\90.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\9001.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\9011.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\91.old.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\92.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\93.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\94.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\95.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\96.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\97.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\98.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_forms\99.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_mlc\dynamic\1\1\_help\0.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\10.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\100.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1001.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1003.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1004.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1005.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1006.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1007.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\101.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1011.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1013.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1015.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1019.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\102.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1022.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1025.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\103.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1031.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1035.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1036.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1038.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1039.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\104.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1041.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1045.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1046.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\1049.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\106.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\107.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\108.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\11.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\111.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\112.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\113.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\114.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\115.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\116.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\118.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\12.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\120.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\121.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\122.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\129.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\13.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\130.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\131.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\132.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\134.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\135.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\136.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\138.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\139.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\14.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\140.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\141.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\142.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\143.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\144.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\145.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\146.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\15.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\150.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\152.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\153.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\155.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\158.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\159.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\16.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\162.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\163.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\164.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\165.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\166.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\167.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\168.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\17.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\172.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\173.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\174.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\175.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\176.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\177.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\178.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\18.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\180.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\181.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\182.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\183.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\184.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\186.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\187.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\188.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\189.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\19.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\191.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\192.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\194.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\196.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\198.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\2.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\20.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\200.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\201.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\202.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\203.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\206.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\207.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\208.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\21.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\212.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\213.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\22.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\23.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\24.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\26.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\27.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\28.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\29.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\3.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\31.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\34.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\35.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\36.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\38.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\39.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\4.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\40.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\41.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\43.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\44.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\45.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\47.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\51.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\52.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\54.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\55.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\56.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\57.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\59.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\6.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\60.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\62.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\64.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\66.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\67.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\68.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\69.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\7.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\71.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_help\72.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\73.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\74.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\75.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\76.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\77.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\78.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\79.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\80.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\81.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\83.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\84.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\85.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\86.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\88.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\8888.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\89.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\90.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\9001.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\9011.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\91.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\92.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\93.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\94.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\95.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\96.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\97.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_help\99.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_mlc\dynamic\1\1\_messages\0.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\10.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\100.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1001.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1003.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1004.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1006.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1007.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1008.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\101.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1011.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1014.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1015.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1018.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\102.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1025.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\103.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1030.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1031.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1036.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1038.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1039.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1042.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1046.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\1049.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\106.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\108.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\11.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\112.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\113.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\114.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\116.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\12.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\120.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\121.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\122.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\129.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\13.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\130.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\131.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\132.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\136.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\137.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\138.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\139.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\14.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\140.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\141.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\142.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\143.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\144.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\145.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\15.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\150.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\151.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\152.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\153.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\156.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\158.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\159.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\16.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\162.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\163.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\164.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\168.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\17.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\171.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\173.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\175.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\177.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\178.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\18.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\181.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\185.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\186.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\189.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\19.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\191.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\198.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\2.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\20.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\201.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\203.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\206.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\207.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\208.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\209.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\21.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\212.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\213.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\214.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\23.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\24.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\26.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\27.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\29.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\3.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\34.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\38.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\39.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\40.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\43.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\45.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\51.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\52.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\54.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\55.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\56.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\57.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\59.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\60.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\64.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\67.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\72.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\74.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\75.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\76.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\77.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\78.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\80.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\81.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\83.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\84.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\85.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\86.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\89.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\9001.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\9010.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\9011.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\91.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\92.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\93.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\95.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\96.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\97.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_messages\98.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_mlc\dynamic\1\1\_various\0.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\10.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\100.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1001.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1003.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1004.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1006.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1007.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1008.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1009.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\101.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1011.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1014.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1015.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1019.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\102.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1025.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\103.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1030.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1039.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1041.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1042.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1046.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1048.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\1049.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\106.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\107.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\108.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\112.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\114.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\116.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\12.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\120.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\121.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\122.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\127.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\129.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\13.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\130.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\131.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\136.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\139.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\140.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\143.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\144.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\15.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\152.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\153.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\156.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\158.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\16.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\17.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\172.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\173.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\175.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\177.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\181.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\183.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\186.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\189.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\19.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\191.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\198.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\2.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\20.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\201.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\203.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\206.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\208.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\209.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\211.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\212.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\213.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\214.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\23.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\26.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\29.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\3.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\34.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\38.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\39.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\40.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\41.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\43.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\51.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\52.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\55.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\56.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\59.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\6.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\64.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\67.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\72.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\75.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\78.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\79.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\80.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\81.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\83.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\84.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\85.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\86.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\88.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\89.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\9001.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\91.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\93.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\95.xml" />
+    <Resource Include="_mlc\dynamic\1\1\_various\96.XML" />
+    <Resource Include="_mlc\dynamic\1\1\_various\97.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Logs\Exceptions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\selection_recycle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\spreadsheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\sign_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\door_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\32x32\key3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\32x32\magician.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\32x32\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\32x32\door_closed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\save_as.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\find_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64\garbage_overflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
