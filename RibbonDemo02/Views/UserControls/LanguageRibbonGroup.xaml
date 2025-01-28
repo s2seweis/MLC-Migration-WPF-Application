@@ -75,6 +75,6 @@
                                    HorizontalAlignment="Left"
                                    IsChecked="{Binding KoreanSelected}" />
         </Grid>
-        <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Languages</Label>
+        <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Sprachen</Label>
     </Grid>
 </UserControl>

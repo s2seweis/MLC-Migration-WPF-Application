@@ -48,7 +48,7 @@
                                        HorizontalAlignment="Left"
                                        IsChecked="{Binding SonstigesSelected}" />
             </Grid>
-        <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Files</Label>
+        <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Verzeichnisse</Label>
     </Grid>
 
 </UserControl>

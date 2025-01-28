@@ -18,7 +18,7 @@ namespace RibbonDemo02
             //viewModel.StateChanged += ViewModel_StateChanged;
 
             // Subscribe to the StaticPropertyChanged event to catch changes in IsAdmin
-            AppState.StaticPropertyChanged += AppState_StaticPropertyChanged;
+            //AppState.StaticPropertyChanged += AppState_StaticPropertyChanged;
 
             //this.DataContext = this; // Set data context to bind the command
             //this.DataContext = new FilesRibbonGroupViewModel();
@@ -28,18 +28,18 @@ namespace RibbonDemo02
 
         }
 
-        private void AppState_StaticPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(AppState.IsAdmin))
-            {
-                // Manually update UI bindings to reflect the IsAdmin change
-                Dispatcher.Invoke(() =>
-                {
-                    // Refreshing the UI by re-setting the DataContext
-                    this.DataContext = this.DataContext;
-                });
-            }
-        }
+        //private void AppState_StaticPropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == nameof(AppState.IsAdmin))
+        //    {
+        //        // Manually update UI bindings to reflect the IsAdmin change
+        //        Dispatcher.Invoke(() =>
+        //        {
+        //            // Refreshing the UI by re-setting the DataContext
+        //            this.DataContext = this.DataContext;
+        //        });
+        //    }
+        //}
 
         private void ViewModel_StateChanged(object sender, EventArgs e)
         {
@@ -54,16 +54,16 @@ namespace RibbonDemo02
                 var selectedTab = (RibbonTab)((Ribbon)sender).SelectedItem;
                 switch (selectedTab.Header)
                 {
-                    case "Migration":
+                    case "Übertragung":
                         ContentControlArea.Content = new Views.Migration();
                         break;
-                    case "XML Files":
+                    case "XML Editor":
                         ContentControlArea.Content = new Views.XmlFiles();
                         break;
-                    case "Logs":
+                    case "Log":
                         ContentControlArea.Content = new Views.Logs();
                         break;
-                    case "Database":
+                    case "Datenbank":
                         ContentControlArea.Content = new Views.DatabaseView();
                         break;
 

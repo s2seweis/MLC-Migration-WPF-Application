@@ -1,6 +1,7 @@
 ﻿using RibbonDemo02.ViewModels;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 
 namespace RibbonDemo02
@@ -12,6 +13,45 @@ namespace RibbonDemo02
     {
         // Shared ViewModel instance to maintain global state across the application
         public static FilesRibbonGroupViewModel SharedViewModel { get; } = new FilesRibbonGroupViewModel();
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Versuche die Dateien zu initialisieren, ignoriere Fehler, wenn sie nicht gefunden werden
+            try
+            {
+                InitializeApp();
+            }
+            catch (Exception ex)
+            {
+                // Fehlerbehandlung, falls beim Starten Probleme auftreten
+                MessageBox.Show($"Fehler beim Initialisieren der Anwendung: {ex.Message}",
+                                "Fehler", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            // Hauptfenster der Anwendung anzeigen
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+
+        private void InitializeApp()
+        {
+            // Beispielhafte Datei und Ordnersuche
+            string xmlDirectory = @"C:\Path\To\Files\";
+
+            // Überprüfen, ob das Verzeichnis existiert, und eine Warnung ausgeben, wenn es nicht vorhanden ist
+            if (!Directory.Exists(xmlDirectory))
+            {
+                MessageBox.Show("Das benötigte Verzeichnis wurde nicht gefunden. Die Anwendung wird mit reduzierten Funktionen gestartet.",
+                                "Verzeichnis fehlt", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                // Optional: Weitere Initialisierungslogik hinzufügen, um die benötigten Dateien zu laden
+                // Diese Logik kann angepasst werden, um mit der verschobenen Ordnerstruktur umzugehen
+            }
+        }
     }
 
     // Application-wide state for managing admin rights

@@ -1,423 +1,214 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Input;
-using System.Windows;
-
-namespace RibbonDemo02.ViewModels
-{
-    public class FilesRibbonGroupViewModelShort : INotifyPropertyChanged
-    {
-        // For the File checkbox - Start
-        private bool _alleSelected;
-        private bool _nachrichtenSelected;
-        private bool _hilfeSelected;
-        private bool _variousSelected;
-        private bool _sonstigesSelected;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        // Event to notify state change
-        public event EventHandler StateChanged;
-        public bool AlleSelected
-        {
-            get => _alleSelected;
-            set
-            {
-                if (_alleSelected != value)
-                {
-                    _alleSelected = value;
-                    OnPropertyChanged(nameof(AlleSelected));
-
-                    // If "Alle" is selected, select all checkboxes
-                    if (_alleSelected)
-                    {
-                        NachrichtenSelected = true;
-                        HilfeSelected = true;
-                        VariousSelected = true;
-                        SonstigesSelected = true;
-                    }
-                    // If "Alle" is unchecked, reset individual selections
-                    else
-                    {
-                        NachrichtenSelected = false;
-                        HilfeSelected = false;
-                        VariousSelected = false;
-                        SonstigesSelected = false;
-                    }
-
-                    // Ensure the StartCommand is updated when state changes
-                    CommandManager.InvalidateRequerySuggested();
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        // Properties for other checkboxes
-        public bool NachrichtenSelected
-        {
-            get => _nachrichtenSelected;
-            set
-            {
-                if (_nachrichtenSelected != value)
-                {
-                    _nachrichtenSelected = value;
-                    OnPropertyChanged(nameof(NachrichtenSelected));
-
-                    if (!_nachrichtenSelected)
-                        AlleSelected = false;
-                    else if (IsAllSelected())
-                        AlleSelected = true;
-
-                    CommandManager.InvalidateRequerySuggested(); // Refresh command availability
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool HilfeSelected
-        {
-            get => _hilfeSelected;
-            set
-            {
-                if (_hilfeSelected != value)
-                {
-                    _hilfeSelected = value;
-                    OnPropertyChanged(nameof(HilfeSelected));
-
-                    if (!_hilfeSelected)
-                        AlleSelected = false;
-                    else if (IsAllSelected())
-                        AlleSelected = true;
-
-                    CommandManager.InvalidateRequerySuggested(); // Refresh command availability
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool VariousSelected
-        {
-            get => _variousSelected;
-            set
-            {
-                if (_variousSelected != value)
-                {
-                    _variousSelected = value;
-                    OnPropertyChanged(nameof(VariousSelected));
-
-                    if (!_variousSelected)
-                        AlleSelected = false;
-                    else if (IsAllSelected())
-                        AlleSelected = true;
-
-                    CommandManager.InvalidateRequerySuggested(); // Refresh command availability
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool SonstigesSelected
-        {
-            get => _sonstigesSelected;
-            set
-            {
-                if (_sonstigesSelected != value)
-                {
-                    _sonstigesSelected = value;
-                    OnPropertyChanged(nameof(SonstigesSelected));
-
-                    if (!_sonstigesSelected)
-                        AlleSelected = false;
-                    else if (IsAllSelected())
-                        AlleSelected = true;
-
-                    CommandManager.InvalidateRequerySuggested(); // Refresh command availability
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        // Helper method to check if all checkboxes are selected
-        private bool IsAllSelected()
-        {
-            return NachrichtenSelected && HilfeSelected && VariousSelected && SonstigesSelected;
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        // For the File checkbox - End 
-
-        // For the Language checkbox - Start
-
-        // For the Language checkboxes
-        private bool _allLanguagesSelected;
-        private bool _germanSelected;
-        private bool _englishSelected;
-        private bool _frenchSelected;
-        private bool _spanishSelected;
-        private bool _italianSelected;
-        private bool _dutchSelected;
-        private bool _japaneseSelected;
-        private bool _koreanSelected;
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-        // Event to notify state change
-        //public event EventHandler StateChanged;
-
-        // "All Languages" checkbox
-        public bool AllLanguagesSelected
-        {
-            get => _allLanguagesSelected;
-            set
-            {
-                if (_allLanguagesSelected != value)
-                {
-                    _allLanguagesSelected = value;
-                    OnPropertyChanged(nameof(AllLanguagesSelected));
-
-                    // If "All" is selected, select all checkboxes
-                    if (_allLanguagesSelected)
-                    {
-                        GermanSelected = true;
-                        EnglishSelected = true;
-                        FrenchSelected = true;
-                        SpanishSelected = true;
-                        ItalianSelected = true;
-                        DutchSelected = true;
-                        JapaneseSelected = true;
-                        KoreanSelected = true;
-                    }
-                    // If "All" is unchecked, reset individual selections
-                    else
-                    {
-                        GermanSelected = false;
-                        EnglishSelected = false;
-                        FrenchSelected = false;
-                        SpanishSelected = false;
-                        ItalianSelected = false;
-                        DutchSelected = false;
-                        JapaneseSelected = false;
-                        KoreanSelected = false;
-                    }
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        // Properties for other language checkboxes
-        // #######################################################
-        // #######################################################
-
-
-        public bool GermanSelected
-        {
-            get => _germanSelected;
-            set
-            {
-                if (_germanSelected != value)
-                {
-                    _germanSelected = value;
-                    OnPropertyChanged(nameof(GermanSelected));
-
-                    if (!_germanSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool EnglishSelected
-        {
-            get => _englishSelected;
-            set
-            {
-                if (_englishSelected != value)
-                {
-                    _englishSelected = value;
-                    OnPropertyChanged(nameof(EnglishSelected));
-
-                    if (!_englishSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool FrenchSelected
-        {
-            get => _frenchSelected;
-            set
-            {
-                if (_frenchSelected != value)
-                {
-                    _frenchSelected = value;
-                    OnPropertyChanged(nameof(FrenchSelected));
-
-                    if (!_frenchSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool SpanishSelected
-        {
-            get => _spanishSelected;
-            set
-            {
-                if (_spanishSelected != value)
-                {
-                    _spanishSelected = value;
-                    OnPropertyChanged(nameof(SpanishSelected));
-
-                    if (!_spanishSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool ItalianSelected
-        {
-            get => _italianSelected;
-            set
-            {
-                if (_italianSelected != value)
-                {
-                    _italianSelected = value;
-                    OnPropertyChanged(nameof(ItalianSelected));
-
-                    if (!_italianSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool DutchSelected
-        {
-            get => _dutchSelected;
-            set
-            {
-                if (_dutchSelected != value)
-                {
-                    _dutchSelected = value;
-                    OnPropertyChanged(nameof(DutchSelected));
-
-                    if (!_dutchSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool JapaneseSelected
-        {
-            get => _japaneseSelected;
-            set
-            {
-                if (_japaneseSelected != value)
-                {
-                    _japaneseSelected = value;
-                    OnPropertyChanged(nameof(JapaneseSelected));
-
-                    if (!_japaneseSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public bool KoreanSelected
-        {
-            get => _koreanSelected;
-            set
-            {
-                if (_koreanSelected != value)
-                {
-                    _koreanSelected = value;
-                    OnPropertyChanged(nameof(KoreanSelected));
-
-                    if (!_koreanSelected) AllLanguagesSelected = false;
-                    else if (IsAllLanguagesSelected()) AllLanguagesSelected = true;
-
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        // Helper method to check if all languages are selected
-        private bool IsAllLanguagesSelected()
-        {
-            return GermanSelected && EnglishSelected && FrenchSelected && SpanishSelected &&
-                   ItalianSelected && DutchSelected && JapaneseSelected && KoreanSelected;
-        }
-
-        // For the Language checkbox - End
-
-
-        // ####################################################### - Command Part
-        // #######################################################
-
-
-        // ICommand for the "Start" button
-        public ICommand StartCommand { get; }
-
-        public FilesRibbonGroupViewModelShort()
-        {
-            StartCommand = new RelayCommand(ExecuteStartCommand, CanExecuteStartCommand);
-        }
-
-        // Method for Start button command
-        private void ExecuteStartCommand(object parameter)
-        {
-            var selectedValuesFiles = new
-            {
-                AlleSelected,
-                NachrichtenSelected,
-                HilfeSelected,
-                VariousSelected,
-                SonstigesSelected
-            };
-
-            var selectedValuesLanguages = new
-            {
-                AllLanguagesSelected,
-                EnglishSelected,
-                FrenchSelected,
-                SpanishSelected,
-                ItalianSelected,
-                GermanSelected,
-                DutchSelected,
-                KoreanSelected,
-                JapaneseSelected
-            };
-
-            var message = $"Start button clicked.\n" +
-                  $"File Section (IsChecked): \n" +
-                  $"Alle: {selectedValuesFiles.AlleSelected}, Nachrichten: {selectedValuesFiles.NachrichtenSelected}, Hilfe: {selectedValuesFiles.HilfeSelected}, Various: {selectedValuesFiles.VariousSelected}, Sonstiges: {selectedValuesFiles.SonstigesSelected}\n" +
-                  $"Language Section (IsChecked): \n" +
-                  $"AllLanguages: {selectedValuesLanguages.AllLanguagesSelected}, German: {selectedValuesLanguages.GermanSelected}, English: {selectedValuesLanguages.EnglishSelected}, French: {selectedValuesLanguages.FrenchSelected}, Spanish: {selectedValuesLanguages.SpanishSelected}, Italian: {selectedValuesLanguages.ItalianSelected}, Dutch: {selectedValuesLanguages.DutchSelected}, Japanese: {selectedValuesLanguages.JapaneseSelected}, Korean: {selectedValuesLanguages.KoreanSelected}";
-
-            MessageBox.Show(message);
-        }
-
-        // Method to determine if StartCommand can execute (ensuring at least one checkbox is selected)
-        private bool CanExecuteStartCommand(object parameter)
-        {
-            return NachrichtenSelected || HilfeSelected || VariousSelected || SonstigesSelected;
-        }
-
-
-    }
-}
+﻿//using System;
+//using System.ComponentModel;
+//using System.Windows.Input;
+//using System.Windows;
+
+//namespace RibbonDemo02.ViewModels
+//{
+//    public class FilesRibbonGroupViewModel : INotifyPropertyChanged
+//    {
+//        // State variables for File and Language sections
+//        // These variables store the selected states for different checkboxes in the File and Language sections
+//        private bool _alleSelected, _hilfeSelected, _nachrichtenSelected, _variousSelected, _sonstigesSelected;
+//        private bool _allLanguagesSelected, _englishSelected, _germanSelected, _frenchSelected, _spanishSelected, _italianSelected, _dutchSelected, _japaneseSelected, _koreanSelected;
+
+//        // Event triggered when property value changes
+//        public event PropertyChangedEventHandler PropertyChanged;
+//        // Event triggered when state changes
+//        public event EventHandler StateChanged;
+
+//        // Helper to notify property changes
+//        private void OnPropertyChanged(string propertyName)
+//        {
+//            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//        }
+
+//        // Method to handle changes in checkbox selection and trigger associated actions
+//        private void HandleCheckboxChange(ref bool field, bool newValue, Action onSelect, Action onDeselect, string propertyName)
+//        {
+//            if (field == newValue) return;
+
+//            field = newValue;
+//            OnPropertyChanged(propertyName);
+
+//            if (newValue) onSelect?.Invoke();
+//            else onDeselect?.Invoke();
+
+//            StateChanged?.Invoke(this, EventArgs.Empty);
+//            CommandManager.InvalidateRequerySuggested();
+//        }
+
+//        //#start File Section 
+//        // Properties for File section checkboxes, linked to the HandleCheckboxChange method
+//        // Each property represents a checkbox in the File section
+
+//        public bool AlleSelected
+//        {
+//            get => _alleSelected;
+//            set => HandleCheckboxChange(ref _alleSelected, value, SelectAllFiles, ResetAllFiles, nameof(AlleSelected));
+//        }
+
+//        public bool HilfeSelected
+//        {
+//            get => _hilfeSelected;
+//            set => HandleCheckboxChange(ref _hilfeSelected, value, CheckAllFiles, () => UpdateAlleSelected(false), nameof(HilfeSelected));
+//        }
+
+//        public bool NachrichtenSelected
+//        {
+//            get => _nachrichtenSelected;
+//            set => HandleCheckboxChange(ref _nachrichtenSelected, value, CheckAllFiles, () => UpdateAlleSelected(false), nameof(NachrichtenSelected));
+//        }
+
+//        public bool VariousSelected
+//        {
+//            get => _variousSelected;
+//            set => HandleCheckboxChange(ref _variousSelected, value, CheckAllFiles, () => UpdateAlleSelected(false), nameof(VariousSelected));
+//        }
+
+//        public bool SonstigesSelected
+//        {
+//            get => _sonstigesSelected;
+//            set => HandleCheckboxChange(ref _sonstigesSelected, value, CheckAllFiles, () => UpdateAlleSelected(false), nameof(SonstigesSelected));
+//        }
+
+//        private void SelectAllFiles()
+//        {
+//            HilfeSelected = NachrichtenSelected = VariousSelected = SonstigesSelected = true;
+//        }
+
+//        private void ResetAllFiles()
+//        {
+//            HilfeSelected = NachrichtenSelected = VariousSelected = SonstigesSelected = false;
+//        }
+
+//        // Method to check if all file checkboxes are selected
+//        private void CheckAllFiles() => UpdateAlleSelected(HilfeSelected && NachrichtenSelected && VariousSelected && SonstigesSelected);
+//        // Method to update the state of the 'Alle' checkbox based on individual selections
+//        private void UpdateAlleSelected(bool state) => _alleSelected = state;
+
+//        //#end File Section
+
+//        //#start Language Section Properties
+//        // Properties for Language section checkboxes
+//        // Similar to the file section, but specific for different language options
+
+//        public bool AllLanguagesSelected
+//        {
+//            get => _allLanguagesSelected;
+//            set => HandleCheckboxChange(ref _allLanguagesSelected, value, SelectAllLanguages, ResetAllLanguages, nameof(AllLanguagesSelected));
+//        }
+
+//        public bool GermanSelected
+//        {
+//            get => _germanSelected;
+//            set => HandleCheckboxChange(ref _germanSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(GermanSelected));
+//        }
+
+//        public bool EnglishSelected
+//        {
+//            get => _englishSelected;
+//            set => HandleCheckboxChange(ref _englishSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(EnglishSelected));
+//        }
+
+//        // Other language properties similar to German and English
+//        public bool FrenchSelected
+//        {
+//            get => _frenchSelected;
+//            set => HandleCheckboxChange(ref _frenchSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(FrenchSelected));
+//        }
+
+//        public bool SpanishSelected
+//        {
+//            get => _spanishSelected;
+//            set => HandleCheckboxChange(ref _spanishSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(SpanishSelected));
+//        }
+
+//        public bool ItalianSelected
+//        {
+//            get => _italianSelected;
+//            set => HandleCheckboxChange(ref _italianSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(ItalianSelected));
+//        }
+
+//        public bool DutchSelected
+//        {
+//            get => _dutchSelected;
+//            set => HandleCheckboxChange(ref _dutchSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(DutchSelected));
+//        }
+
+//        public bool JapaneseSelected
+//        {
+//            get => _japaneseSelected;
+//            set => HandleCheckboxChange(ref _japaneseSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(JapaneseSelected));
+//        }
+
+//        public bool KoreanSelected
+//        {
+//            get => _koreanSelected;
+//            set => HandleCheckboxChange(ref _koreanSelected, value, CheckAllLanguages, () => UpdateAllLanguagesSelected(false), nameof(KoreanSelected));
+//        }
+
+//        private void SelectAllLanguages()
+//        {
+//            GermanSelected = EnglishSelected = FrenchSelected = SpanishSelected = ItalianSelected = DutchSelected = JapaneseSelected = KoreanSelected = true;
+//        }
+
+//        private void ResetAllLanguages()
+//        {
+//            GermanSelected = EnglishSelected = FrenchSelected = SpanishSelected = ItalianSelected = DutchSelected = JapaneseSelected = KoreanSelected = false;
+//        }
+
+//        private void CheckAllLanguages() => UpdateAllLanguagesSelected(IsAllLanguagesChecked());
+//        private bool IsAllLanguagesChecked() => GermanSelected && EnglishSelected && FrenchSelected && SpanishSelected &&
+//                                                ItalianSelected && DutchSelected && JapaneseSelected && KoreanSelected;
+
+//        private void UpdateAllLanguagesSelected(bool state) => _allLanguagesSelected = state;
+
+
+//        #region Start Command
+
+//        public ICommand StartCommand { get; }
+
+//        public FilesRibbonGroupViewModel()
+//        {
+//            StartCommand = new RelayCommand(ExecuteStartCommand, CanExecuteStartCommand);
+//        }
+
+//        private void ExecuteStartCommand(object parameter)
+//        {
+//            var selectedValuesFiles = new
+//            {
+//                AlleSelected,
+//                NachrichtenSelected,
+//                HilfeSelected,
+//                VariousSelected,
+//                SonstigesSelected
+//            };
+
+//            var selectedValuesLanguages = new
+//            {
+//                AllLanguagesSelected,
+//                GermanSelected,
+//                EnglishSelected,
+//                FrenchSelected,
+//                SpanishSelected,
+//                ItalianSelected,
+//                DutchSelected,
+//                JapaneseSelected,
+//                KoreanSelected
+//            };
+
+//            var message = $"Start button clicked.\n" +
+//                          $"File Section (IsChecked): \n" +
+//                          $"Alle: {selectedValuesFiles.AlleSelected}, Nachrichten: {selectedValuesFiles.NachrichtenSelected}, Hilfe: {selectedValuesFiles.HilfeSelected}, Various: {selectedValuesFiles.VariousSelected}, Sonstiges: {selectedValuesFiles.SonstigesSelected}\n" +
+//                          $"Language Section (IsChecked): \n" +
+//                          $"AllLanguages: {selectedValuesLanguages.AllLanguagesSelected}, German: {selectedValuesLanguages.GermanSelected}, English: {selectedValuesLanguages.EnglishSelected}, French: {selectedValuesLanguages.FrenchSelected}, Spanish: {selectedValuesLanguages.SpanishSelected}, Italian: {selectedValuesLanguages.ItalianSelected}, Dutch: {selectedValuesLanguages.DutchSelected}, Japanese: {selectedValuesLanguages.JapaneseSelected}, Korean: {selectedValuesLanguages.KoreanSelected}";
+
+//            MessageBox.Show(message);
+//        }
+
+//        private bool CanExecuteStartCommand(object parameter) => HilfeSelected || NachrichtenSelected || VariousSelected || SonstigesSelected;
+
+//        #endregion
+//    }
+//}
