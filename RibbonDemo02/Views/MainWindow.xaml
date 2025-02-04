@@ -10,16 +10,13 @@
         ResizeMode="NoResize" MinWidth="800" MinHeight="500"
         WindowStartupLocation="CenterScreen"
         >
-
     <Grid>
         <ribbon:Ribbon Margin="0 -22" SelectionChanged="TabControl_SelectionChanged" Background="LightGray">
             <!-- Help Pane Content -->
-
                 <ribbon:Ribbon.HelpPaneContent>
-                    
-                <ribbon:RibbonMenuButton HorizontalAlignment="Left" Margin="-780,4,0,0" Label="Menu">
+                <ribbon:RibbonMenuButton HorizontalAlignment="Left" Margin="-780,2,0,0" Label="Menu" Height="22">
                     <!-- First Menu Item -->
-                    <ribbon:RibbonMenuItem Click="RibbonMenuItem_Click">
+                    <ribbon:RibbonMenuItem Click="RibbonMenuItem_SettingsClick">
                         <ribbon:RibbonMenuItem.Header>
                             <Grid Margin="-22 0 0 0">
                                 <!-- Define Columns -->
@@ -31,7 +28,6 @@
                                     <ColumnDefinition Width="*"/>
                                     <!-- Text -->
                                 </Grid.ColumnDefinitions>
-
                                 <!-- Image Icon -->
                                 <Image Source="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\gearwheel.png"
                                        Width="16" Height="16" HorizontalAlignment="Center"/>
@@ -41,9 +37,8 @@
                             </Grid>
                         </ribbon:RibbonMenuItem.Header>
                     </ribbon:RibbonMenuItem>
-
                     <!-- Second Menu Item -->
-                    <ribbon:RibbonMenuItem Click="RibbonMenuItem_Click_1">
+                    <ribbon:RibbonMenuItem Click="RibbonMenuItem_CloseClick">
                         <ribbon:RibbonMenuItem.Header>
                             <Grid Margin="-22 0 0 0">
                                 <!-- Define Columns -->
@@ -55,31 +50,22 @@
                                     <ColumnDefinition Width="*"/>
                                     <!-- Text -->
                                 </Grid.ColumnDefinitions>
-
                                 <!-- Image Icon -->
                                 <Image Source="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\door_exit.png"
                                        Width="16" Height="16" HorizontalAlignment="Center"/>
-
                                 <!-- Menu Item Text -->
                                 <TextBlock Text="Beenden" Grid.Column="2" VerticalAlignment="Center"/>
                             </Grid>
                         </ribbon:RibbonMenuItem.Header>
                     </ribbon:RibbonMenuItem>
                 </ribbon:RibbonMenuButton>
-
             </ribbon:Ribbon.HelpPaneContent>
-            
-            
-
             <!-- Application Menu -->
             <ribbon:Ribbon.ApplicationMenu >
                 <ribbon:RibbonApplicationMenu Visibility="Hidden" Background="green" BorderThickness="0"  
                        KeyTip="F">
-
-
                 </ribbon:RibbonApplicationMenu>
             </ribbon:Ribbon.ApplicationMenu>
-
             <!-- Ribbon Tabs -->
             <ribbon:RibbonTab  Header="Übertragung" Name="TabMigration">
                 <ribbon:RibbonGroup Header="Übertragung" Margin="0 0 0 0">
@@ -92,76 +78,51 @@
                         KeyTip="V"
                         ToolTip="Paste (Ctrl+V)"
                         ToolTipDescription="Paste the contents of the Clipboard into the document."/>
-
                     <ribbon:RibbonButton Margin="0 10 0 0" Label="Abbruch"
                         SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\sign_stop.png" 
                         LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\sign_stop.png"
                         KeyTip="V"
                         ToolTip="Paste (Ctrl+V)"
                         ToolTipDescription="Paste the contents of the Clipboard into the document." />
-                    
                 </ribbon:RibbonGroup>
-
-                <!-- Ribbon Tab moved to UserControls -->
                 <local:FilesRibbonGroup/>
-
                 <local:LanguageRibbonGroup/>
-
                 <ribbon:RibbonGroup Header="Zurücksetzen" 
-                                    IsEnabled="False" 
                                     Margin="0 10 0 0">
-
                     <ribbon:RibbonButton Label="Wiederherstellen"
                     SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\replace.png" 
                     LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\replace.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." />
-
                 </ribbon:RibbonGroup>
-
             </ribbon:RibbonTab>
-
             <ribbon:RibbonTab Header="XML Editor" Name="Edit">
                 <ribbon:RibbonGroup Header="Bearbeitung" Margin="0,10,0,0">
-                    <!-- Radio Buttons Group -->
                     <StackPanel Orientation="Vertical">
-                        <!-- Radio Button 1 -->
-                        <RadioButton Name="RadioButtonOption1" Content="Activated" Margin="5" 
+                        <RadioButton Name="RadioButtonOption1" Content="Aktivieren" Margin="5" 
                      GroupName="EditOptions" IsChecked="True"/>
-
-                        <!-- Radio Button 2 -->
-                        <RadioButton Name="RadioButtonOption2" Content="Deactivated" Margin="5" 
+                        <RadioButton Name="RadioButtonOption2" Content="Deaktivieren" Margin="5" 
                      GroupName="EditOptions"/>
                     </StackPanel>
                 </ribbon:RibbonGroup>
-
                 <ribbon:RibbonGroup Header="Format" Margin="0,10,0,0">
-                    <!-- Radio Buttons Group -->
-
                     <ribbon:RibbonButton Label="Speichern"
                     SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\save_as.png" 
                     LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\save_as.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." /> 
-                    
                     <ribbon:RibbonButton Label="Zurück"
                     SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\rotate_left.png" 
                     LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\rotate_left.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." /> 
-                    
                 </ribbon:RibbonGroup>
-
-
-
             </ribbon:RibbonTab>
-
             <ribbon:RibbonTab Header="Log" Name="TabLogs">
-                <ribbon:RibbonGroup Header="Clear" Margin="0,10,0,0">
-                    <!-- Radio Buttons Group -->
+                <ribbon:RibbonGroup Header="Aufräumen" Margin="0,10,0,0">
                     <ribbon:RibbonButton Label="Leeren"
                     SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\garbage_overflow.png" 
                     LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\garbage_overflow.png"
@@ -170,32 +131,27 @@
                     ToolTipDescription="Paste the contents of the Clipboard into the document." />
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
-
-            <ribbon:RibbonTab Header="Datenbank" Name="Database">
-                <ribbon:RibbonGroup Header="Tabellen" Margin="0,10,0,0">
-                    <!-- Radio Buttons Group -->
-                    <ribbon:RibbonButton Label="Anzeigen"
-                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\data.png" 
-                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\data.png"
-                    KeyTip="V"
-                    ToolTip="Paste (Ctrl+V)"
-                    ToolTipDescription="Paste the contents of the Clipboard into the document." />
-                </ribbon:RibbonGroup>
-            </ribbon:RibbonTab>
-
         </ribbon:Ribbon>
-
-        <!-- Content Control to hold selected views -->
         <ContentControl x:Name="ContentControlArea" Margin="0,120,0,0"/>
 
-        <ProgressBar Name="ProgressBarFileReading" 
-                     Margin="0,0,0,0" 
-                     Height="25" 
-                     Minimum="0" 
-                     Maximum="100" 
-                     Value="0" 
-                     HorizontalAlignment="Stretch" 
-                     VerticalAlignment="Bottom" />
-    </Grid>
+        <Grid>
+            <!-- Progress Bar -->
+            <ProgressBar Name="ProgressBarFileReading" 
+                 Margin="0,0,0,0" 
+                 Height="25" 
+                 Minimum="0" 
+                 Maximum="100" 
+                 Value="{Binding ProcessingProgress.Progress, Mode=TwoWay}" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Bottom" />
 
+            <!-- Text Block for progress text -->
+            <TextBlock Name="ProgressText"
+               VerticalAlignment="Bottom"
+               HorizontalAlignment="Center"
+               Margin="0 0 0 5"
+               Text="{Binding ProcessingProgress.ProgressText}" />
+        </Grid>
+
+    </Grid>
 </Window>

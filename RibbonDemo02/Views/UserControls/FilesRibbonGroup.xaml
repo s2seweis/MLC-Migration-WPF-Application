@@ -23,30 +23,30 @@
                 <ribbon:RibbonCheckBox Margin="15 0 0 0" Grid.Row="0" Grid.Column="0" 
                                        Label="Alle" KeyTip="R" 
                                        HorizontalAlignment="Left"
-                                       IsChecked="{Binding AlleSelected}" />
+                                       IsChecked="{Binding FileSelection.AlleSelected}" />
 
                 <!-- Checkbox for Nachrichten -->
                 <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="1" 
                                        Label="Nachrichten" KeyTip="R" 
-                                       IsChecked="{Binding NachrichtenSelected}" />
+                                       IsChecked="{Binding FileSelection.NachrichtenSelected}" />
 
                 <!-- Checkbox for Hilfe -->
                 <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="0" 
                                        Label="Hilfe" KeyTip="R" 
                                        HorizontalAlignment="Left"
-                                       IsChecked="{Binding HilfeSelected}" />
+                                       IsChecked="{Binding FileSelection.HilfeSelected}" />
 
                 <!-- Checkbox for Various -->
                 <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="0" 
                                        Label="Various" KeyTip="R" 
                                        HorizontalAlignment="Left"
-                                       IsChecked="{Binding VariousSelected}" />
+                                       IsChecked="{Binding FileSelection.VariousSelected}" />
 
                 <!-- Checkbox for Sonstiges -->
                 <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="1" 
                                        Label="Sonstiges" KeyTip="R" 
                                        HorizontalAlignment="Left"
-                                       IsChecked="{Binding SonstigesSelected}" />
+                                       IsChecked="{Binding FileSelection.SonstigesSelected}" />
             </Grid>
         <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Verzeichnisse</Label>
     </Grid>

@@ -8,8 +8,8 @@
         <viewModels:FilesRibbonGroupViewModel />
     </UserControl.DataContext>
 
-    <Grid Margin="0 -70 0 0" >
-        <Grid>
+    <Grid Margin="-10 -55 0 0" >
+        <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -19,61 +19,50 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <!-- Checkbox for all languages -->
+
             <ribbon:RibbonCheckBox Grid.Row="0" Grid.Column="0" Margin="15 0 0 0"
                                    HorizontalAlignment="Left"
                                    Label="Alle" KeyTip="R" 
-                                   IsChecked="{Binding AllLanguagesSelected}" />
+                                   IsChecked="{Binding LanguageSelection.AllLanguagesSelected}" />
 
             <!-- Checkbox for German -->
-            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="0" 
+            <ribbon:RibbonCheckBox Grid.Row="0" Grid.Column="1" 
                                    HorizontalAlignment="Left"
-                                   Label="Deutsch" KeyTip="R" 
-                                   IsChecked="{Binding GermanSelected}" />
+                                   Label="German" KeyTip="R" 
+                                   IsChecked="{Binding LanguageSelection.GermanSelected}" />
 
             <!-- Checkbox for English -->
-            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="1" 
-                                   Label="Englisch" KeyTip="R" 
+            <ribbon:RibbonCheckBox Grid.Row="0" Grid.Column="2" 
+                                   Label="English" KeyTip="R" 
                                    HorizontalAlignment="Left"
-                                   IsChecked="{Binding EnglishSelected}" />
-
-            <!-- Hidden Checkbox for French -->
-            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="2" 
-                                   Label="Französisch" KeyTip="R" 
-                                   HorizontalAlignment="Left"
-                                   IsChecked="{Binding FrenchSelected}" />
+                                   IsChecked="{Binding LanguageSelection.EnglishSelected}" />
 
             <!-- Checkbox for Spanish -->
-            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="3" 
-                                   Label="Spanisch" KeyTip="R" 
+            <ribbon:RibbonCheckBox Grid.Row="0" Grid.Column="3" 
+                                   Label="Spanish" KeyTip="R" 
                                    HorizontalAlignment="Left"
-                                   IsChecked="{Binding SpanishSelected}" />
+                                   IsChecked="{Binding LanguageSelection.SpanishSelected}" />
 
             <!-- Checkbox for Italian -->
-            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="0" 
-                                   Label="Italienisch" KeyTip="R" 
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="1" 
+                                   Label="Hungarian" KeyTip="R" 
                                    HorizontalAlignment="Left"
-                                   IsChecked="{Binding ItalianSelected}" />
+                                   IsChecked="{Binding LanguageSelection.HungarianSelected}" />
             
             <!-- Checkbox for Dutch -->
-            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="1" 
-                                   Label="Niederländisch" KeyTip="R" 
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="2" 
+                                   Label="Polish" KeyTip="R" 
                                    HorizontalAlignment="Left"
-                                   IsChecked="{Binding DutchSelected}" />
+                                   IsChecked="{Binding LanguageSelection.PolishSelected}" />
             
             <!-- Checkbox for Japanese -->
-            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="2" 
-                                   Label="Japanisch" KeyTip="R" 
+            <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="3" 
+                                   Label="Danish" KeyTip="R" 
                                    HorizontalAlignment="Left"
-                                   IsChecked="{Binding JapaneseSelected}" />
-            
-            <!-- Checkbox for Korean -->
-            <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="3" 
-                                   Label="Koreanisch" KeyTip="R" 
-                                   HorizontalAlignment="Left"
-                                   IsChecked="{Binding KoreanSelected}" />
+                                   IsChecked="{Binding LanguageSelection.DanishSelected}" />
+         
         </Grid>
         <Label Foreground="#AEADB0" IsEnabled="False" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="0 0 0 -14">Sprachen</Label>
     </Grid>

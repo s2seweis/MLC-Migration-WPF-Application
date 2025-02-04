@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -11,11 +10,8 @@ namespace RibbonDemo02.Helpers
 {
     public class XmlProcessorHelper
     {
-
-
-        // read 3 nodes: 0-2, then it goes on like this
-
-        public List<XMLData> ConvertXML(string file, string nodePrefix, int fileAmount, string parentFolder, string backupFolder)
+        // Convert XML with progress reporting
+        public List<XMLData> ConvertXML(string file, string nodePrefix, int fileAmount, string parentFolder, string backupFolder, IProgress<double> progress)
         {
             FileHelper fileHelper = new FileHelper();
 
@@ -32,7 +28,11 @@ namespace RibbonDemo02.Helpers
                 xMLDocument.Load(file);
                 fileHelper.showProgress(fileAmount, "case2", nodePrefix, parentFolder, backupFolder); // Call showProgress after loading the file
 
-                // Loop through the child nodes (avoid recursive pattern matching)
+                // Get total child nodes for progress tracking
+                int totalNodes = xMLDocument.DocumentElement.ChildNodes.Count;
+                int processedNodes = 0;
+
+                // Loop through the child nodes
                 foreach (XmlNode node in xMLDocument.DocumentElement.ChildNodes) // Use DocumentElement for root node
                 {
                     var xmlData = GetListOfXMLData(node, file, nodePrefix);
@@ -40,6 +40,13 @@ namespace RibbonDemo02.Helpers
                     {
                         convertedXMLData.Add(xmlData);
                     }
+
+                    // Update progress
+                    processedNodes++;
+                    double progressPercentage = (double)processedNodes / totalNodes * 100;
+                    progress.Report(progressPercentage); // Report progress after each node is processed
+
+
                 }
             }
             catch (Exception ex)
@@ -52,6 +59,7 @@ namespace RibbonDemo02.Helpers
             return convertedXMLData;
         }
 
+        // Extract XML data from each node
         public XMLData GetListOfXMLData(XmlNode node, string file, string nodePrefix)
         {
             XMLData xMLData = new XMLData();
@@ -74,7 +82,5 @@ namespace RibbonDemo02.Helpers
 
             return xMLData;
         }
-
-
     }
 }

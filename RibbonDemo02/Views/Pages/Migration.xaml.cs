@@ -12,8 +12,7 @@ namespace RibbonDemo02.Views
         {
             InitializeComponent();
             // Pfad für das Verzeichnis, das geladen werden soll
-            string path = @"C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\_mlc\dynamic\1\";
-
+            string path = @"C:\Users\SWE\source\repos\MLC-Migration-WPF-Application\RibbonDemo02\_mlc\dynamic\1";
             try
             {
                 // Verwenden von DirectoryHelper, um die Struktur zu laden
@@ -27,31 +26,6 @@ namespace RibbonDemo02.Views
             {
                 MessageBox.Show(ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            // Ereignis zuordnen
-            //DirectoryTreeViewMigration.SelectedItemChanged += DirectoryTreeView_SelectedItemChanged;
         }
-
-        //private void DirectoryTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        //{
-        //    if (e.NewValue is TreeViewItem selectedItem)
-        //    {
-        //        string selectedPath = selectedItem.Tag as string;
-
-        //        if (selectedPath != null && File.Exists(selectedPath))
-        //        {
-        //            try
-        //            {
-        //                // Dateiinhalt lesen und im AvalonEdit-TextEditor anzeigen
-        //                string fileContent = File.ReadAllText(selectedPath);
-        //                TextEditor.Text = fileContent;
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MessageBox.Show($"Fehler beim Laden der Datei: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

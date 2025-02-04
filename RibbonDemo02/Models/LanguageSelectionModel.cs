@@ -1,76 +1,140 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace RibbonDemo02.Models
 {
-    internal class LanguageSelectionModel
+    public class LanguageSelectionModel : INotifyPropertyChanged
     {
-        public bool AllLanguagesSelected { get; set; }
-        public bool GermanSelected { get; set; }
-        public bool EnglishSelected { get; set; }
-        public bool FrenchSelected { get; set; }
-        public bool SpanishSelected { get; set; }
-        public bool ItalianSelected { get; set; }
-        public bool DutchSelected { get; set; }
-        public bool JapaneseSelected { get; set; }
-        public bool KoreanSelected { get; set; }
+        private bool _allLanguagesSelected;
+        private bool _germanSelected;
+        private bool _englishSelected;
+        private bool _spanishSelected;
+        private bool _hungarianSelected;
+        private bool _polishSelected;
+        private bool _danishSelected;
 
-        public LanguageSelectionModel()
+        public bool AllLanguagesSelected
         {
-            // Initialize with default values if necessary
-            AllLanguagesSelected = false;
-            GermanSelected = false;
-            EnglishSelected = false;
-            FrenchSelected = false;
-            SpanishSelected = false;
-            ItalianSelected = false;
-            DutchSelected = false;
-            JapaneseSelected = false;
-            KoreanSelected = false;
-        }
-
-        // Method to reset language selections based on the "AllLanguagesSelected" flag
-        public void UpdateLanguageSelections()
-        {
-            if (AllLanguagesSelected)
+            get => _allLanguagesSelected;
+            set
             {
-                GermanSelected = true;
-                EnglishSelected = true;
-                FrenchSelected = true;
-                SpanishSelected = true;
-                ItalianSelected = true;
-                DutchSelected = true;
-                JapaneseSelected = true;
-                KoreanSelected = true;
-            }
-            else
-            {
-                GermanSelected = false;
-                EnglishSelected = false;
-                FrenchSelected = false;
-                SpanishSelected = false;
-                ItalianSelected = false;
-                DutchSelected = false;
-                JapaneseSelected = false;
-                KoreanSelected = false;
+                if (_allLanguagesSelected != value)
+                {
+                    _allLanguagesSelected = value;
+                    OnPropertyChanged(nameof(AllLanguagesSelected));
+                    if (_allLanguagesSelected)
+                    {
+                        GermanSelected = true;
+                        EnglishSelected = true;
+                        SpanishSelected = true;
+                        HungarianSelected = true;
+                        PolishSelected = true;
+                        DanishSelected = true;
+                    }
+                    else
+                    {
+                        GermanSelected = false;
+                        EnglishSelected = false;
+                        SpanishSelected = false;
+                        HungarianSelected = false;
+                        PolishSelected = false;
+                        DanishSelected = false;
+                    }
+                }
             }
         }
 
-        // Method to check if all languages are selected
-        public bool IsAllLanguagesSelected()
+        public bool GermanSelected
         {
-            return GermanSelected && EnglishSelected && FrenchSelected &&
-                   SpanishSelected && ItalianSelected && DutchSelected &&
-                   JapaneseSelected && KoreanSelected;
+            get => _germanSelected;
+            set
+            {
+                if (_germanSelected != value)
+                {
+                    _germanSelected = value;
+                    OnPropertyChanged(nameof(GermanSelected));
+                    if (!_germanSelected)
+                        AllLanguagesSelected = false;
+                }
+            }
         }
 
-        // Method to update "AllLanguagesSelected" when individual languages change
-        public void CheckAllLanguagesSelected()
+        public bool EnglishSelected
         {
-            AllLanguagesSelected = IsAllLanguagesSelected();
+            get => _englishSelected;
+            set
+            {
+                if (_englishSelected != value)
+                {
+                    _englishSelected = value;
+                    OnPropertyChanged(nameof(EnglishSelected));
+                    if (!_englishSelected)
+                        AllLanguagesSelected = false;
+                }
+            }
         }
+
+        public bool SpanishSelected
+        {
+            get => _spanishSelected;
+            set
+            {
+                if (_spanishSelected != value)
+                {
+                    _spanishSelected = value;
+                    OnPropertyChanged(nameof(SpanishSelected));
+                    if (!_spanishSelected)
+                        AllLanguagesSelected = false;
+                }
+            }
+        }
+
+        public bool HungarianSelected
+        {
+            get => _hungarianSelected;
+            set
+            {
+                if (_hungarianSelected != value)
+                {
+                    _hungarianSelected = value;
+                    OnPropertyChanged(nameof(HungarianSelected));
+                    if (!_hungarianSelected)
+                        AllLanguagesSelected = false;
+                }
+            }
+        }
+
+        public bool PolishSelected
+        {
+            get => _polishSelected;
+            set
+            {
+                if (_polishSelected != value)
+                {
+                    _polishSelected = value;
+                    OnPropertyChanged(nameof(PolishSelected));
+                    if (!_polishSelected)
+                        AllLanguagesSelected = false;
+                }
+            }
+        }
+
+        public bool DanishSelected
+        {
+            get => _danishSelected;
+            set
+            {
+                if (_danishSelected != value)
+                {
+                    _danishSelected = value;
+                    OnPropertyChanged(nameof(DanishSelected));
+                    if (!_danishSelected)
+                        AllLanguagesSelected = false;
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

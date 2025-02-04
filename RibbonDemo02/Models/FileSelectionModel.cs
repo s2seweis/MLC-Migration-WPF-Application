@@ -1,39 +1,111 @@
-﻿namespace RibbonDemo02.Models
+﻿using System.ComponentModel;
+
+namespace RibbonDemo02.Models
 {
-    public class FilesSelectionModel
+    public class FileSelectionModel : INotifyPropertyChanged
     {
-        public bool AlleSelected { get; set; }
-        public bool NachrichtenSelected { get; set; }
-        public bool HilfeSelected { get; set; }
-        public bool ReminderSelected { get; set; }
-        public bool VariousSelected { get; set; }
-        public bool SonstigesSelected { get; set; }
+        private bool _alleSelected;
+        private bool _nachrichtenSelected;
+        private bool _hilfeSelected;
+        private bool _variousSelected;
+        private bool _sonstigesSelected;
 
-        // Method to update selection based on the "Alle" checkbox
-        public void UpdateAlleSelection()
+        /// <summary>
+        /// Gets or sets whether all file selections are checked.
+        /// When set to true, all individual selections are also checked.
+        /// </summary>
+        public bool AlleSelected
         {
-            if (AlleSelected)
+            get => _alleSelected;
+            set
             {
-                NachrichtenSelected = true;
-                HilfeSelected = true;
-                ReminderSelected = true;
-                VariousSelected = true;
-                SonstigesSelected = true;
-            }
-            else
-            {
-                NachrichtenSelected = false;
-                HilfeSelected = false;
-                ReminderSelected = false;
-                VariousSelected = false;
-                SonstigesSelected = false;
+                if (_alleSelected != value)
+                {
+                    _alleSelected = value;
+                    OnPropertyChanged(nameof(AlleSelected));
+
+                    // If "Alle" is checked, mark all as selected.
+                    if (_alleSelected)
+                    {
+                        NachrichtenSelected = true;
+                        HilfeSelected = true;
+                        VariousSelected = true;
+                        SonstigesSelected = true;
+                    }
+                    else
+                    {
+                        NachrichtenSelected = false;
+                        HilfeSelected = false;
+                        VariousSelected = false;
+                        SonstigesSelected = false;
+                    }
+                }
             }
         }
 
-        // Method to check if "Alle" should be selected based on other selections
-        public void UpdateAlleIfNecessary()
+        public bool NachrichtenSelected
         {
-            AlleSelected = NachrichtenSelected && HilfeSelected && ReminderSelected && VariousSelected && SonstigesSelected;
+            get => _nachrichtenSelected;
+            set
+            {
+                if (_nachrichtenSelected != value)
+                {
+                    _nachrichtenSelected = value;
+                    OnPropertyChanged(nameof(NachrichtenSelected));
+                    // If an individual checkbox is unchecked, uncheck "Alle".
+                    if (!_nachrichtenSelected)
+                        AlleSelected = false;
+                }
+            }
         }
+
+        public bool HilfeSelected
+        {
+            get => _hilfeSelected;
+            set
+            {
+                if (_hilfeSelected != value)
+                {
+                    _hilfeSelected = value;
+                    OnPropertyChanged(nameof(HilfeSelected));
+                    if (!_hilfeSelected)
+                        AlleSelected = false;
+                }
+            }
+        }
+
+        public bool VariousSelected
+        {
+            get => _variousSelected;
+            set
+            {
+                if (_variousSelected != value)
+                {
+                    _variousSelected = value;
+                    OnPropertyChanged(nameof(VariousSelected));
+                    if (!_variousSelected)
+                        AlleSelected = false;
+                }
+            }
+        }
+
+        public bool SonstigesSelected
+        {
+            get => _sonstigesSelected;
+            set
+            {
+                if (_sonstigesSelected != value)
+                {
+                    _sonstigesSelected = value;
+                    OnPropertyChanged(nameof(SonstigesSelected));
+                    if (!_sonstigesSelected)
+                        AlleSelected = false;
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
