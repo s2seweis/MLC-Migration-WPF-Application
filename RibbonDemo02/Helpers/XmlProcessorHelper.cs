@@ -3,15 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace RibbonDemo02.Helpers
 {
     public class XmlProcessorHelper
     {
-        // Convert XML with progress reporting
-        public List<XMLData> ConvertXML(string file, string nodePrefix, int fileAmount, string parentFolder, string backupFolder, IProgress<double> progress)
+        // Convert XML with progress reporting using IProgress<ProgressUpdate>
+        public List<XMLData> ConvertXML(
+            string file,
+            string nodePrefix,
+            int fileAmount,
+            string parentFolder,
+            string backupFolder,
+            IProgress<ProgressUpdate> progress)
         {
             FileHelper fileHelper = new FileHelper();
 
@@ -26,40 +31,54 @@ namespace RibbonDemo02.Helpers
             try
             {
                 xMLDocument.Load(file);
-                fileHelper.showProgress(fileAmount, "case2", nodePrefix, parentFolder, backupFolder); // Call showProgress after loading the file
+                fileHelper.showProgress(fileAmount, "case2", nodePrefix, parentFolder, backupFolder);
 
                 // Get total child nodes for progress tracking
                 int totalNodes = xMLDocument.DocumentElement.ChildNodes.Count;
                 int processedNodes = 0;
 
+                // Variable to track the last reported progress percentage.
+                double lastReportedPercentage = 0;
+
                 // Loop through the child nodes
-                foreach (XmlNode node in xMLDocument.DocumentElement.ChildNodes) // Use DocumentElement for root node
+                foreach (XmlNode node in xMLDocument.DocumentElement.ChildNodes)
                 {
                     var xmlData = GetListOfXMLData(node, file, nodePrefix);
-                    if (!string.IsNullOrEmpty(xmlData.Id)) // Check if Id is not null or empty
+                    if (!string.IsNullOrEmpty(xmlData.Id))
                     {
                         convertedXMLData.Add(xmlData);
                     }
 
-                    // Update progress
                     processedNodes++;
                     double progressPercentage = (double)processedNodes / totalNodes * 100;
-                    progress.Report(progressPercentage); // Report progress after each node is processed
 
+                    // Only report progress if it has increased by at least 1% since the last report.
+                    if (progressPercentage - lastReportedPercentage >= 1.0 || processedNodes == totalNodes)
+                    {
+                        lastReportedPercentage = progressPercentage;
 
+                        //var progressUpdate = new ProgressUpdate
+                        //{
+                        //    Percent = progressPercentage,
+                        //    FilesProcessed = processedNodes, // Here, "FilesProcessed" represents nodes processed
+                        //    TotalFiles = totalNodes
+                        //};
+
+                        //progress.Report(progressUpdate);
+                    }
+                    // Artificial delay (e.g., 10 milliseconds)
+                    System.Threading.Thread.Sleep(2);
                 }
             }
             catch (Exception ex)
             {
-                // Handle the error (you can log it if needed)
                 LoggerHelper.Log($"Error processing file {file}: {ex.Message}");
-                return null; // Return null if there's an issue loading or parsing the XML
+                return null;
             }
 
             return convertedXMLData;
         }
 
-        // Extract XML data from each node
         public XMLData GetListOfXMLData(XmlNode node, string file, string nodePrefix)
         {
             XMLData xMLData = new XMLData();

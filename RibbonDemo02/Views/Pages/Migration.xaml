@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- TreeView for the directories and files -->
-        <TreeView Name="DirectoryTreeViewMigration" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!--<TreeView Name="DirectoryTreeViewMigration" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
 
         <!-- AvalonEdit TextEditor -->
         <!--<avalon:TextEditor 

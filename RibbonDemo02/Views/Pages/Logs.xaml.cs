@@ -14,7 +14,7 @@ namespace RibbonDemo02.Views
         {
             InitializeComponent();
             // Pfad für das Verzeichnis, das geladen werden soll
-            string path = @"C:\Users\SWE\source\repos\MLC-Migration-WPF-Application\RibbonDemo02\Data\Logs";
+            string path = @"C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Data\Logs";
 
             try
             {

@@ -75,6 +75,7 @@
     <Compile Include="Models\FileSelectionModel.cs" />
     <Compile Include="Models\LanguageSelectionModel.cs" />
     <Compile Include="Models\ProcessingProgressModel.cs" />
+    <Compile Include="Models\ProgressUpdate.cs" />
     <Compile Include="Models\XMLData.cs" />
     <Compile Include="Models\XmlPath.cs" />
     <Compile Include="Service\ProcessFilesService.cs" />

@@ -132,6 +132,7 @@
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
+        
         <ContentControl x:Name="ContentControlArea" Margin="0,120,0,0"/>
 
         <Grid>

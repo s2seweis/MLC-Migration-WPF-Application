@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using RibbonDemo02.Helpers;
 using RibbonDemo02.Models;
 
@@ -12,17 +9,36 @@ namespace RibbonDemo02.Service
 {
     internal class ProcessFilesService
     {
-        //  common naming convention in C# to indicate that the variable is a private field
-        private static readonly XmlPath _xmlPath = new XmlPath(); // Initialize XMLPathsDynamic
+        private static readonly XmlPath _xmlPath = new XmlPath();
 
-        public static void ProcessFilesMethod(List<int> selectedLanguages, List<string> selectedFolders, IProgress<double> progress, ref int totalFiles, ref int filesProcessed)
+        public static void ProcessFilesMethod(
+            List<int> selectedLanguages,
+            List<string> selectedFolders,
+            IProgress<ProgressUpdate> progress,
+            out int totalFiles,
+            out int filesProcessed,
+            out int currentLanguage,
+            out string currentFolderNew
+            )
         {
-            // Check if the root directory exists
+            filesProcessed = 0;
+            totalFiles = 0;
+            currentLanguage = 0;
+            currentFolderNew = string.Empty;
+
             if (Directory.Exists(_xmlPath.DynamicPath))
             {
-                // Process the directory recursively
-                ProcessDirectoryRecursively(_xmlPath.DynamicPath, selectedLanguages, selectedFolders, progress, ref totalFiles, ref filesProcessed);
-
+                // Start processing from the root directory.
+                ProcessDirectoryRecursively(
+                    _xmlPath.DynamicPath,
+                    selectedLanguages,
+                    selectedFolders,
+                    progress,
+                    totalFiles,
+                    ref filesProcessed,
+                    ref currentLanguage,
+                    ref currentFolderNew
+                    );
             }
             else
             {
@@ -30,60 +46,96 @@ namespace RibbonDemo02.Service
             }
         }
 
-        public static void ProcessDirectoryRecursively(string currentDirectory, List<int> selectedLanguages, List<string> selectedFolders, IProgress<double> progress, ref int totalFiles, ref int filesProcessed)
+        private static int CountValidFiles(string currentDirectory)
+        {
+            int count = 0;
+            FileHelper fileHelper = new FileHelper();
+
+            string[] xmlFiles = Directory.GetFiles(currentDirectory, "*.xml");
+            count += xmlFiles.Count(file => fileHelper.CheckIfFileFollowsPattern(file));
+
+            foreach (string subdirectory in Directory.GetDirectories(currentDirectory))
+            {
+                count += CountValidFiles(subdirectory);
+            }
+            return count;
+        }
+
+        // currentLanguage is passed by reference so that updates persist in the caller.
+        private static void ProcessDirectoryRecursively(
+            string currentDirectory,
+            List<int> selectedLanguages,
+            List<string> selectedFolders,
+            IProgress<ProgressUpdate> progress,
+            int totalFiles,
+            ref int filesProcessed,
+            ref int currentLanguage,
+            ref string currentFolderNew
+            )
         {
             try
             {
                 FileHelper fileHelper = new FileHelper();
-
-                // Get all XML files in the current directory
                 string[] xmlFiles = Directory.GetFiles(currentDirectory, "*.xml");
                 string[] validXmlFiles = xmlFiles.Where(file => fileHelper.CheckIfFileFollowsPattern(file)).ToArray();
-                string[] pathParts = currentDirectory.TrimEnd(Path.DirectorySeparatorChar)
-                                                     .Split(Path.DirectorySeparatorChar);
+
+                // Update currentLanguage from the parent directory name.
+                // For example, if currentDirectory is "C:\Data\3\_messages", then the language is 3.
+                if (int.TryParse(Path.GetFileName(Path.GetDirectoryName(currentDirectory)), out int lang))
+                {
+                    currentLanguage = lang;
+                }
 
                 if (validXmlFiles.Length > 0)
                 {
-                    // Extract the name of the current directory
-                    string parentFolder = Path.GetFileName(currentDirectory.TrimEnd(Path.DirectorySeparatorChar));
-
-                    // Construct the backup folder name within the current directory
-                    string backupPath = Path.Combine(currentDirectory, $"{parentFolder}Backup");
+                    string currentFolder = Path.GetFileName(currentDirectory.TrimEnd(Path.DirectorySeparatorChar));
+                    currentFolderNew = currentFolder;
+                    string backupPath = Path.Combine(currentDirectory, $"{currentFolder}Backup");
                     string backupFolder = Path.GetFileName(backupPath.TrimEnd(Path.DirectorySeparatorChar));
-
-                    // Create the backup directory
                     Directory.CreateDirectory(backupFolder);
+                    string fileType = FileHelper.DetermineFileType(currentDirectory);
 
-                    string _fileType = FileHelper.DetermineFileType(currentDirectory);
-
-                    // Initialize XmlProcessor and SqlRepository
                     XmlProcessorService processor = new XmlProcessorService();
                     SqlRepositoryService repository = new SqlRepositoryService();
 
-                    ProcessFilesMethod(xmlFiles, _fileType, processor, repository, parentFolder, backupFolder, progress, ref totalFiles, ref filesProcessed);
+                    ProcessFilesMethod(
+                        validXmlFiles,
+                        fileType,
+                        processor,
+                        repository,
+                        currentFolder,
+                        backupFolder,
+                        progress,
+                        ref totalFiles,
+                        ref filesProcessed,
+                        ref currentLanguage,
+                        ref currentFolderNew
+                        );
                 }
 
-                // Iterate over subdirectories
                 foreach (string subdirectory in Directory.GetDirectories(currentDirectory))
                 {
-                    string subdirectoryName = Path.GetFileName(subdirectory);
-
-                    // Check if this subdirectory is a language folder
-                    int folderLanguage = int.TryParse(subdirectoryName, out int languageNumber) ? languageNumber : 0;
-
-                    // Process only if the subdirectory corresponds to a selected language
+                    int folderLanguage = int.TryParse(Path.GetFileName(subdirectory), out int languageNumber) ? languageNumber : 0;
                     if (selectedLanguages.Contains(folderLanguage))
                     {
-                        // Check if any of the selected folders match the current subdirectory
-                        // Look for subdirectories named exactly as the selected folder names
                         foreach (string selectedFolder in selectedFolders)
                         {
                             string folderToProcess = Path.Combine(subdirectory, selectedFolder);
-
                             if (Directory.Exists(folderToProcess))
                             {
-                                // Recursively process the valid subdirectory
-                                ProcessDirectoryRecursively(folderToProcess, selectedLanguages, selectedFolders, progress, ref totalFiles, ref filesProcessed);
+                                totalFiles = 0;
+                                filesProcessed = 0;
+                                currentLanguage = 0;
+                                ProcessDirectoryRecursively(
+                                    folderToProcess,
+                                    selectedLanguages,
+                                    selectedFolders,
+                                    progress,
+                                    totalFiles,
+                                    ref filesProcessed,
+                                    ref currentLanguage,
+                                    ref currentFolderNew
+                                    );
                             }
                         }
                     }
@@ -91,67 +143,56 @@ namespace RibbonDemo02.Service
             }
             catch (Exception ex)
             {
-                // Log any errors encountered during directory processing
                 LoggerHelper.Log($"Error processing directory {currentDirectory}: {ex.Message}");
             }
         }
 
-        // ### Move the ProcessFiles method into a helper class? 
-
-        public static void ProcessFilesMethod(string[] files, string prefix, XmlProcessorService processor, SqlRepositoryService repository, string parentFolder, string backupFolder, IProgress<double> progress, ref int totalFiles, ref int filesProcessed)
+        // currentLanguage is passed by reference so that its updated value is available to the caller.
+        private static void ProcessFilesMethod(
+            string[] files,
+            string prefix,
+            XmlProcessorService processor,
+            SqlRepositoryService repository,
+            string currentFolder,
+            string backupFolder,
+            IProgress<ProgressUpdate> progress,
+            ref int totalFiles,
+            ref int filesProcessed,
+            ref int currentLanguage,
+            ref string currentFolderNew
+            )
         {
-            bool isAnyFileProcessed = false; // Flag to track if any file was processed
-            int validXmlFileCount = 0; // Counter to track files matching the pattern
             FileHelper fileHelper = new FileHelper();
+            int validXmlFileCount = files.Count(file => fileHelper.CheckIfFileFollowsPattern(file));
 
-            // Count files matching the pattern using CheckIfFileFollowsPattern
-            foreach (string file in files)
-            {
-                if (fileHelper.CheckIfFileFollowsPattern(file))
-                {
-                    validXmlFileCount++; // Increment count for valid XML files
-                }
-            }
-
-            // Update the totalFiles count in the calling class (ViewModel)
+            // Assign the valid XML file count to totalFiles for this batch.
             totalFiles = validXmlFileCount;
 
-            // Process only valid XML files
             foreach (string file in files)
             {
-                // Check if the file matches the pattern (this is where CheckIfFileFollowsPattern is used)
                 if (fileHelper.CheckIfFileFollowsPattern(file))
                 {
-                    // here is currently a error !
-                    var convertedXML = processor.ConvertXML(file, prefix, validXmlFileCount, parentFolder, backupFolder, progress);
+                    var convertedXML = processor.ConvertXML(file, prefix, validXmlFileCount, currentFolder, backupFolder, progress);
                     if (convertedXML != null)
                     {
-                        // has to be true
                         bool isSuccess = repository.SaveDataToDB(convertedXML, prefix);
                         if (isSuccess)
                         {
-                            ProcessFileHelper.MoveFileToNewLocation(file); // Use helper method to move the file
-                            isAnyFileProcessed = true; // Mark that a file has been processed
+                            ProcessFileHelper.MoveFileToNewLocation(file);
+                            filesProcessed++;
 
-                            filesProcessed++; // Increment filesProcessed count
-                            //progress.Report((double)filesProcessed / totalFiles * 100);
+                            double percent = totalFiles > 0 ? (double)filesProcessed / totalFiles * 100 : 0;
+                            progress.Report(new ProgressUpdate
+                            {
+                                Percent = percent,
+                                FilesProcessed = filesProcessed,
+                                TotalFiles = totalFiles,
+                                CurrentLanguage = currentLanguage,
+                                CurrentFolderNew = currentFolderNew
+                            });
                         }
                     }
                 }
-            }
-
-            // Only log the message outside the loop when a file was processed
-            if (isAnyFileProcessed)
-            {
-                // Log success message
-                //Console.WriteLine($"Successfully processed " +
-                //$"{prefix.ToUpper()} " +
-                //$"files.");
-            }
-            else
-            {
-                // Log the message when no valid files were processed
-                LoggerHelper.Log($"No valid {prefix.ToUpper()} files were processed.");
             }
         }
     }

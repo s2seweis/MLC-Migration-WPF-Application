@@ -17,7 +17,7 @@ namespace RibbonDemo02.Service
             _xmlHelper = new XmlProcessorHelper();
         }
 
-        public List<XMLData> ConvertXML(string file, string nodePrefix, int fileAmount, string parentFolder, string backupFolder, IProgress<double> progress)
+        public List<XMLData> ConvertXML(string file, string nodePrefix, int fileAmount, string parentFolder, string backupFolder, IProgress<ProgressUpdate> progress)
         {
             return _xmlHelper.ConvertXML(file, nodePrefix, fileAmount, parentFolder, backupFolder, progress);
         }
