@@ -17,11 +17,20 @@ namespace RibbonDemo02.Service
 
         public RestoreFilesService()
         {
-            RestoreFiles();
+            //RestoreFiles();
         }
 
-        public static void RestoreFiles()
+        public static void RestoreFiles(
+            IProgress<ProgressUpdate> progress,
+            out string currentPath,
+            out int totalFiles,
+            out int filesProcessed
+            )
         {
+            currentPath = _xmlPath.DynamicPath;
+            filesProcessed = 0;
+            totalFiles = 0;
+            
             // Check if the root directory exists
             if (!Directory.Exists(_xmlPath.DynamicPath))
             {
@@ -31,10 +40,10 @@ namespace RibbonDemo02.Service
 
             // Recursively iterate over all subdirectories for restoration process
             //RestoreFilesFromBackup(rootDirectory); // true indicates we are restoring files
-            RestoreFilesFromBackupRecursively(_xmlPath.DynamicPath); // true indicates we are restoring files
+            RestoreFilesFromBackupRecursively(_xmlPath.DynamicPath, progress, currentPath, ref totalFiles, ref filesProcessed); // true indicates we are restoring files
         }
 
-        public static void RestoreFilesFromBackupRecursively(string currentDirectory)
+        public static void RestoreFilesFromBackupRecursively(string currentDirectory, IProgress<ProgressUpdate> progress, string currentPath, ref int totalFiles, ref int filesProcessed )
         {
             try
             {
@@ -50,13 +59,14 @@ namespace RibbonDemo02.Service
                         if (parentDirectory != null)
                         {
                             // Process the files in the backup folder
-                            RestoreFilesHelper.ProcessRestoreFiles(currentDirectory, parentDirectory);
+                            RestoreFilesHelper.ProcessRestoreFiles(currentDirectory, parentDirectory, progress, ref totalFiles, ref filesProcessed);
+
                         }
                     }
                     else
                     {
                         // Recursively call RestoreFilesFromBackup for the next subdirectory
-                        RestoreFilesFromBackupRecursively(subdirectory);
+                        RestoreFilesFromBackupRecursively(subdirectory, progress, currentPath, ref totalFiles, ref filesProcessed);
                     }
                 }
             }

@@ -39,9 +39,6 @@ namespace RibbonDemo02
                     case "Log":
                         ContentControlArea.Content = new Views.Logs();
                         break;
-                    case "Datenbank":
-                        ContentControlArea.Content = new Views.DatabaseView();
-                        break;
 
                 }
             }

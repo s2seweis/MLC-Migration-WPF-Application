@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace RibbonDemo02.Models
 {
@@ -10,6 +11,9 @@ namespace RibbonDemo02.Models
         private int _filesProcessed;
         private int _currentLanguage;
         private string _currentFolder;
+        private string _currentPath;
+        private string _processType;
+        private bool _isCompleted;
 
         public double Progress
         {
@@ -21,8 +25,26 @@ namespace RibbonDemo02.Models
                     _progress = value;
                     OnPropertyChanged(nameof(Progress));
                     UpdateProgressText();
+
+                    // Check if progress reached 100%
+                    if (_progress >= 100 && !_isCompleted)
+                    {
+                        OnProgressCompleted();
+                    }
                 }
             }
+        }
+
+        public event EventHandler ProgressCompleted;
+
+        private void OnProgressCompleted()
+        {
+            _isCompleted = true;
+            ProgressCompleted?.Invoke(this, EventArgs.Empty);
+            Progress = 0;
+            // Set completion message
+            ProgressText = "Bereit.";
+            OnPropertyChanged(nameof(ProgressText));
         }
 
         public int TotalFiles
@@ -81,10 +103,38 @@ namespace RibbonDemo02.Models
             }
         }
 
+        public string CurrentPath
+        {
+            get => _currentPath;
+            set
+            {
+                if (_currentPath != value)
+                {
+                    _currentPath = value;
+                    OnPropertyChanged(nameof(CurrentPath));
+                }
+            }
+        }
+
+        public string ProcessType
+        {
+            get => _processType;
+            set
+            {
+                if (_processType != value)
+                {
+                    _isCompleted = false;
+                    _processType = value;
+                    OnPropertyChanged(nameof(ProcessType));
+                    UpdateProgressText();
+                }
+            }
+        }
+
         public string ProgressText
         {
             get => _progressText;
-            private set
+            set
             {
                 if (_progressText != value)
                 {
@@ -94,12 +144,29 @@ namespace RibbonDemo02.Models
             }
         }
 
-        private void UpdateProgressText()
+        public void UpdateProgressText()
         {
-            // Convert the current language integer to a proper language name.
-            string languageName = GetLanguageName(CurrentLanguage);
-            string folderName = string.IsNullOrEmpty(CurrentFolderNew) ? "N/A" : CurrentFolderNew;
-            ProgressText = $"{FilesProcessed}/{TotalFiles} files processed from Language: {languageName} and Folder: {folderName} ({Progress:F0}%)";
+            if (_isCompleted)
+            {
+                // If completed, set progress text to "Bereit."
+                ProgressText = "Bereit.";
+            }
+            else
+            {
+                string languageName = GetLanguageName(CurrentLanguage);
+                string folderName = string.IsNullOrEmpty(CurrentFolderNew) ? "N/A" : CurrentFolderNew;
+
+                if (ProcessType == "Restore")
+                {
+                    ProgressText = $"{FilesProcessed}/{TotalFiles} files restored from Path: {CurrentPath} {ProcessType} ({Progress:F0}%)";
+                }
+                else
+                {
+                    ProgressText = $"{FilesProcessed}/{TotalFiles} files processed from Language: {languageName} and Folder: {folderName} ({Progress:F0}%)";
+                }
+            }
+
+            OnPropertyChanged(nameof(ProgressText));
         }
 
         private string GetLanguageName(int language)
@@ -120,6 +187,33 @@ namespace RibbonDemo02.Models
                 default:
                     return "N/A";
             }
+        }
+
+        //public void Reset()
+        //{
+        //    _isCompleted = false;
+        //    Progress = 0;
+        //    FilesProcessed = 0;
+        //    TotalFiles = 0;
+        //    CurrentLanguage = 0;
+        //    CurrentFolderNew = string.Empty;
+        //    CurrentPath = string.Empty;
+        //    ProcessType = string.Empty;
+        //    ProgressText = string.Empty;
+        //}
+
+        public void Reset()
+        {
+            _isCompleted = false;
+            Progress = 0;
+            FilesProcessed = 0;
+            TotalFiles = 0;
+            CurrentLanguage = 0;
+            CurrentFolderNew = string.Empty;
+            CurrentPath = string.Empty;
+            ProcessType = string.Empty;
+            ProgressText = string.Empty;
+            OnPropertyChanged(nameof(ProgressText));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -13,5 +13,7 @@ namespace RibbonDemo02.Models
         public int TotalFiles { get; set; }
         public int CurrentLanguage { get; set; }
         public string CurrentFolderNew { get; set; }
+        public string CurrentPath { get; set; }
+        public string ProcessType { get; set; }
     }
 }

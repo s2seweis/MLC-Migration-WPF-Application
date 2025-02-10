@@ -31,7 +31,7 @@ namespace RibbonDemo02.Helpers
             try
             {
                 xMLDocument.Load(file);
-                fileHelper.showProgress(fileAmount, "case2", nodePrefix, parentFolder, backupFolder);
+                //fileHelper.showProgress(fileAmount, "case2", nodePrefix, parentFolder, backupFolder);
 
                 // Get total child nodes for progress tracking
                 int totalNodes = xMLDocument.DocumentElement.ChildNodes.Count;

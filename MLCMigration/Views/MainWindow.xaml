@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RibbonDemo02.Views.UserControls"
-        xmlns:ribbon="clr-namespace:System.Windows.Controls.Ribbon;assembly=System.Windows.Controls.Ribbon" xmlns:viewmodels="clr-namespace:RibbonDemo02.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:FilesRibbonGroupViewModel}"
+        xmlns:ribbon="clr-namespace:System.Windows.Controls.Ribbon;assembly=System.Windows.Controls.Ribbon" xmlns:viewmodels="clr-namespace:RibbonDemo02.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:FilesMigrationViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MLC Migration" Height="600" Width="800"
         ResizeMode="NoResize" MinWidth="800" MinHeight="500"
         WindowStartupLocation="CenterScreen"
         >
@@ -29,7 +29,7 @@
                                     <!-- Text -->
                                 </Grid.ColumnDefinitions>
                                 <!-- Image Icon -->
-                                <Image Source="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\gearwheel.png"
+                                <Image Source="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\gearwheel.png"
                                        Width="16" Height="16" HorizontalAlignment="Center"/>
 
                                 <!-- Menu Item Text -->
@@ -51,7 +51,7 @@
                                     <!-- Text -->
                                 </Grid.ColumnDefinitions>
                                 <!-- Image Icon -->
-                                <Image Source="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\door_exit.png"
+                                <Image Source="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\door_exit.png"
                                        Width="16" Height="16" HorizontalAlignment="Center"/>
                                 <!-- Menu Item Text -->
                                 <TextBlock Text="Beenden" Grid.Column="2" VerticalAlignment="Center"/>
@@ -73,14 +73,14 @@
                         Command="{Binding StartCommand}"
                         IsEnabled="{Binding IsChecked}"
                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" 
-                        SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\selection_recycle.png" 
-                        LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\selection_recycle.png"
+                        SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\selection_recycle.png" 
+                        LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\selection_recycle.png"
                         KeyTip="V"
                         ToolTip="Paste (Ctrl+V)"
                         ToolTipDescription="Paste the contents of the Clipboard into the document."/>
                     <ribbon:RibbonButton Margin="0 10 0 0" Label="Abbruch"
-                        SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\sign_stop.png" 
-                        LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\sign_stop.png"
+                        SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\sign_stop.png" 
+                        LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\sign_stop.png"
                         KeyTip="V"
                         ToolTip="Paste (Ctrl+V)"
                         ToolTipDescription="Paste the contents of the Clipboard into the document." />
@@ -90,8 +90,9 @@
                 <ribbon:RibbonGroup Header="Zurücksetzen" 
                                     Margin="0 10 0 0">
                     <ribbon:RibbonButton Label="Wiederherstellen"
-                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\replace.png" 
-                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\replace.png"
+                    Command="{Binding RestoreCommand}"
+                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\replace.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\replace.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." />
@@ -108,14 +109,14 @@
                 </ribbon:RibbonGroup>
                 <ribbon:RibbonGroup Header="Format" Margin="0,10,0,0">
                     <ribbon:RibbonButton Label="Speichern"
-                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\save_as.png" 
-                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\save_as.png"
+                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\save_as.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\save_as.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." /> 
                     <ribbon:RibbonButton Label="Zurück"
-                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\rotate_left.png" 
-                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\rotate_left.png"
+                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\rotate_left.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\rotate_left.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." /> 
@@ -124,8 +125,8 @@
             <ribbon:RibbonTab Header="Log" Name="TabLogs">
                 <ribbon:RibbonGroup Header="Aufräumen" Margin="0,10,0,0">
                     <ribbon:RibbonButton Label="Leeren"
-                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\garbage_overflow.png" 
-                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Assets\Icons\64x64\garbage_overflow.png"
+                    SmallImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\garbage_overflow.png" 
+                    LargeImageSource="C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\Assets\Icons\64x64\garbage_overflow.png"
                     KeyTip="V"
                     ToolTip="Paste (Ctrl+V)"
                     ToolTipDescription="Paste the contents of the Clipboard into the document." />
@@ -151,7 +152,8 @@
                VerticalAlignment="Bottom"
                HorizontalAlignment="Center"
                Margin="0 0 0 5"
-               Text="{Binding ProcessingProgress.ProgressText}" />
+               Text="{Binding ProcessingProgress.ProgressText, Mode=TwoWay}" 
+                       />
         </Grid>
 
     </Grid>

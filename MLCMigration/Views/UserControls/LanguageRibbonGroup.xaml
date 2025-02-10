@@ -5,7 +5,7 @@
              xmlns:viewModels="clr-namespace:RibbonDemo02.ViewModels">
 
     <UserControl.DataContext>
-        <viewModels:FilesRibbonGroupViewModel />
+        <viewModels:FilesMigrationViewModel />
     </UserControl.DataContext>
 
     <Grid Margin="-10 -55 0 0" >
@@ -17,6 +17,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>

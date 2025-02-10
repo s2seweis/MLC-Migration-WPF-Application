@@ -5,7 +5,7 @@
              xmlns:viewModels="clr-namespace:RibbonDemo02.ViewModels">
 
     <UserControl.DataContext>
-        <viewModels:FilesRibbonGroupViewModel />
+        <viewModels:FilesMigrationViewModel />
     </UserControl.DataContext>
     
     <Grid Margin="0 -70 0 0" >
@@ -20,7 +20,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!-- Checkbox for Alle -->
-                <ribbon:RibbonCheckBox Margin="15 0 0 0" Grid.Row="0" Grid.Column="0" 
+                <ribbon:RibbonCheckBox Margin="0 0 0 0" Grid.Row="0" Grid.Column="0" 
                                        Label="Alle" KeyTip="R" 
                                        HorizontalAlignment="Left"
                                        IsChecked="{Binding FileSelection.AlleSelected}" />
@@ -31,13 +31,13 @@
                                        IsChecked="{Binding FileSelection.NachrichtenSelected}" />
 
                 <!-- Checkbox for Hilfe -->
-                <ribbon:RibbonCheckBox Grid.Row="1" Grid.Column="0" 
+            <ribbon:RibbonCheckBox Margin="5 0 0 0" Grid.Row="1" Grid.Column="0" 
                                        Label="Hilfe" KeyTip="R" 
                                        HorizontalAlignment="Left"
                                        IsChecked="{Binding FileSelection.HilfeSelected}" />
 
                 <!-- Checkbox for Various -->
-                <ribbon:RibbonCheckBox Grid.Row="2" Grid.Column="0" 
+            <ribbon:RibbonCheckBox Margin="5 0 0 0" Grid.Row="2" Grid.Column="0" 
                                        Label="Various" KeyTip="R" 
                                        HorizontalAlignment="Left"
                                        IsChecked="{Binding FileSelection.VariousSelected}" />

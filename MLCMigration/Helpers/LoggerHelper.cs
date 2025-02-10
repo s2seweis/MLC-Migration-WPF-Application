@@ -8,7 +8,7 @@ namespace RibbonDemo02.Helpers
     public static class LoggerHelper
     {
         private static readonly string _logDirectory =
-            Path.Combine("C:\\Users\\SWE\\source\\repos\\11. MLC Migration WPF\\RibbonDemo02\\Data\\Logs");
+            Path.Combine("C:\\Users\\SWE\\source\\repos\\11. MLC Migration WPF\\MLCMigration\\Data\\Logs");
 
         private static string _logFilePath;
         private static readonly HashSet<string> _loggedMessages = new HashSet<string>();

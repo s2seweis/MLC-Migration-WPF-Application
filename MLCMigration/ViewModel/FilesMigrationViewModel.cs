@@ -9,7 +9,7 @@ using RibbonDemo02.Service;
 
 namespace RibbonDemo02.ViewModels
 {
-    public class FilesRibbonGroupViewModel : INotifyPropertyChanged
+    public class FilesMigrationViewModel : INotifyPropertyChanged
     {
         public ProcessingProgressModel ProcessingProgress { get; set; } = new ProcessingProgressModel();
         public FileSelectionModel FileSelection { get; set; } = new FileSelectionModel();
@@ -18,13 +18,18 @@ namespace RibbonDemo02.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler StateChanged;
         public ICommand StartCommand { get; }
+        public ICommand RestoreCommand { get; }
 
-        public FilesRibbonGroupViewModel()
+        public FilesMigrationViewModel()
         {
             // Remove any default setting if you don't want a checkbox preselected.
             // FileSelection.NachrichtenSelected = true;  
 
             StartCommand = new RelayCommand(ExecuteStartCommand, CanExecuteStartCommand);
+
+            // Neues RestoreCommand
+            RestoreCommand = new RelayCommand(ExecuteRestoreCommand);
+
 
             FileSelection.PropertyChanged += (s, e) =>
             {
@@ -37,14 +42,24 @@ namespace RibbonDemo02.ViewModels
                 StateChanged?.Invoke(this, EventArgs.Empty);
             };
 
-            ProcessingProgress.PropertyChanged += (s, e) =>
+
+            ProcessingProgress.ProgressCompleted += (s, e) =>
             {
-                OnPropertyChanged(nameof(ProcessingProgress));
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show("Der Vorgang wurde erfolgreich abgeschlossen!", "Fertig", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // UI-Refresh erzwingen
+                    OnPropertyChanged(nameof(ProcessingProgress));
+                });
             };
+
+
         }
 
         private async void ExecuteStartCommand(object parameter)
         {
+            ProcessingProgress.Reset();
+
             var selectedFolders = new List<string>();
             if (FileSelection.NachrichtenSelected) selectedFolders.Add("_messages");
             if (FileSelection.HilfeSelected) selectedFolders.Add("_help");
@@ -74,7 +89,6 @@ namespace RibbonDemo02.ViewModels
                 ProcessingProgress.Progress = update.Percent;
                 ProcessingProgress.FilesProcessed = update.FilesProcessed;
                 ProcessingProgress.TotalFiles = update.TotalFiles;
-                //
                 ProcessingProgress.CurrentLanguage = update.CurrentLanguage;
                 ProcessingProgress.CurrentFolderNew = update.CurrentFolderNew;
                 //
@@ -101,6 +115,32 @@ namespace RibbonDemo02.ViewModels
                    FileSelection.HilfeSelected ||
                    FileSelection.VariousSelected ||
                    FileSelection.SonstigesSelected;
+        }
+
+        private async void ExecuteRestoreCommand(object parameter)
+        {
+            ProcessingProgress.Reset();
+
+            MessageBox.Show("Wiederherstellen wurde gestartet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            var progress = new Progress<ProgressUpdate>(update =>
+            {
+                ProcessingProgress.Progress = update.Percent;
+                ProcessingProgress.FilesProcessed = update.FilesProcessed;
+                ProcessingProgress.TotalFiles = update.TotalFiles;
+                ProcessingProgress.CurrentPath = update.CurrentPath;
+                ProcessingProgress.ProcessType = update.ProcessType;
+            });
+
+            await Task.Run(() =>
+            {
+                RestoreFilesService.RestoreFiles(
+                    progress,
+                    out string currentPath,
+                    out int totalFiles,
+                    out int filesProcessed
+                    );
+            });
         }
 
         protected void OnPropertyChanged(string propertyName) =>

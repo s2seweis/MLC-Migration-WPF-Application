@@ -82,10 +82,7 @@
     <Compile Include="Service\RestoreFilesService.cs" />
     <Compile Include="Service\SqlRespositoryService.cs" />
     <Compile Include="Service\XmlProcessorService.cs" />
-    <Compile Include="ViewModel\FilesRibbonGroupViewModel.cs" />
-    <Compile Include="Views\Pages\DatabaseView.xaml.cs">
-      <DependentUpon>DatabaseView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModel\FilesMigrationViewModel.cs" />
     <Compile Include="Views\Pages\Logs.xaml.cs">
       <DependentUpon>Logs.xaml</DependentUpon>
     </Compile>
@@ -118,10 +115,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Pages\DatabaseView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Pages\Logs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -12,7 +12,7 @@ namespace RibbonDemo02
     public partial class App : Application
     {
         // Shared ViewModel instance to maintain global state across the application
-        public static FilesRibbonGroupViewModel SharedViewModel { get; } = new FilesRibbonGroupViewModel();
+        public static FilesMigrationViewModel SharedViewModel { get; } = new FilesMigrationViewModel();
 
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -1,20 +1,18 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using RibbonDemo02.Helpers;
 
 namespace RibbonDemo02.Views
 {
-    public partial class Logs : UserControl
+    public partial class XmlFiles : UserControl
     {
-        public Logs()
+        public XmlFiles()
         {
             InitializeComponent();
             // Pfad für das Verzeichnis, das geladen werden soll
-            string path = @"C:\Users\SWE\source\repos\11. MLC Migration WPF\RibbonDemo02\Data\Logs";
+            string path = @"C:\Users\SWE\source\repos\11. MLC Migration WPF\MLCMigration\_mlc\dynamic\1";
 
             try
             {
@@ -34,10 +32,8 @@ namespace RibbonDemo02.Views
             DirectoryTreeView.SelectedItemChanged += DirectoryTreeView_SelectedItemChanged;
         }
 
-        // Wenn ein Item im TreeView ausgewählt wird (z.B. eine Datei)
         private void DirectoryTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            // Sicherstellen, dass das ausgewählte Element eine Datei ist
             if (e.NewValue is TreeViewItem selectedItem)
             {
                 string selectedPath = selectedItem.Tag as string;
@@ -46,9 +42,9 @@ namespace RibbonDemo02.Views
                 {
                     try
                     {
-                        // Inhalt der ausgewählten Datei lesen und im TextBox anzeigen
+                        // Dateiinhalt lesen und im AvalonEdit-TextEditor anzeigen
                         string fileContent = File.ReadAllText(selectedPath);
-                        FileContentTextBox.Text = fileContent;
+                        TextEditor.Text = fileContent;
                     }
                     catch (Exception ex)
                     {
